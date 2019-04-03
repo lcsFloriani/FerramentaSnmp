@@ -9,13 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Infrastructure", "{847CF37C-CAD8-4BD6-B3D2-461DC5732ECA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{1B5FAC56-73BD-4D88-B290-7A01EE6D9DD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnmpTool.Domain", "SnmpTool.Domain\SnmpTool.Domain.csproj", "{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesOutProject", "..\TestesOutProject\TestesOutProject.csproj", "{FE992011-47F9-459D-B807-56A6A3812063}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnmpTool.Infra.SnmpReader", "SnmpTool.Infra.SnmpReader\SnmpTool.Infra.SnmpReader.csproj", "{519490E1-59D1-4872-BB60-F85A896CC965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnmpTool.Domain", "SnmpTool.Domain\SnmpTool.Domain.csproj", "{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnmpTool.Infra.SnmpReader", "SnmpTool.Infra.SnmpReader\SnmpTool.Infra.SnmpReader.csproj", "{519490E1-59D1-4872-BB60-F85A896CC965}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FE992011-47F9-459D-B807-56A6A3812063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE992011-47F9-459D-B807-56A6A3812063}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE992011-47F9-459D-B807-56A6A3812063}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE992011-47F9-459D-B807-56A6A3812063}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,12 +29,15 @@ Global
 		{519490E1-59D1-4872-BB60-F85A896CC965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{519490E1-59D1-4872-BB60-F85A896CC965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{519490E1-59D1-4872-BB60-F85A896CC965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FE992011-47F9-459D-B807-56A6A3812063} = {1B5FAC56-73BD-4D88-B290-7A01EE6D9DD1}
 		{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4} = {23E2D49A-D0ED-476B-82A3-30B66778AB84}
 		{519490E1-59D1-4872-BB60-F85A896CC965} = {847CF37C-CAD8-4BD6-B3D2-461DC5732ECA}
 	EndGlobalSection

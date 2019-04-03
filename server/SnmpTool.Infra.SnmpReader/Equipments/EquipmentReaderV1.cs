@@ -14,7 +14,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             _snmpManager = snmpManager;
         }
         public Equipment GetEquipment()
-        {
+        {    
             var equipment = new Equipment
             {
                 Description = GetContentByOId("1.3.6.1.2.1.1.1.0"),
@@ -22,8 +22,8 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 Location = GetContentByOId("1.3.6.1.2.1.1.6.0"),
                 Name = GetContentByOId("1.3.6.1.2.1.1.5.0"),
                 UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
-                InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0")),
-                Temperature = Convert.ToDouble(GetContentByOId(""))
+                InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"))
+                //Temperature = Convert.ToDouble(GetContentByOId(""))
             };
             if(equipment.InterfacesCount != 0)
             {
@@ -75,7 +75,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             if(result != null)
             {
                 if (result.Pdu.ErrorStatus == 0)
-                    contentToReturn = result.Pdu.VbList[0].Oid.ToString();                
+                    contentToReturn = result.Pdu.VbList[0].Value.ToString();                
                 else
                 {
                     // jogar exception aqui depois pq deu merda 
