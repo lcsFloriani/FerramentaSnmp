@@ -10,6 +10,7 @@ namespace SnmpTool.Domain.Equipments
         public string Location { get; set; }
         public string UpTime { get; set; }
         public double Temperature { get; set; }
+        public int InterfacesCount { get; set; }
         public List<Interface> NetworkInterfaces { get; set; }
     }
 }

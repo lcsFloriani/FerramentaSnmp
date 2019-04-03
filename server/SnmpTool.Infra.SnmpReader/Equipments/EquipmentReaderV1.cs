@@ -22,6 +22,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 Location = GetContentByOId("1.3.6.1.2.1.1.6.0"),
                 Name = GetContentByOId("1.3.6.1.2.1.1.5.0"),
                 UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
+                InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0")),
                 Temperature = Convert.ToDouble(GetContentByOId(""))
             };
             return equipment;
