@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace SnmpTool.Domain.Equipments
 {
@@ -10,5 +10,6 @@ namespace SnmpTool.Domain.Equipments
         public string Location { get; set; }
         public string UpTime { get; set; }
         public double Temperature { get; set; }
+        public List<Interface> NetworkInterfaces { get; set; }
     }
 }
