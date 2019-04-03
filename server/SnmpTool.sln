@@ -15,6 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnmpTool.Infra.SnmpReader",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnmpTool.Application", "SnmpTool.Application\SnmpTool.Application.csproj", "{1715D5AC-8514-40A8-8A7C-C09EBA5E9D5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 . Distributed Services", "1 . Distributed Services", "{B6EEB680-BAA8-40B4-A815-FBDCFD3021D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnmpTool.API", "SnmpTool.API\SnmpTool.API.csproj", "{1B35D330-1F2A-4D8A-8A7E-F01FB63F3215}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,14 @@ Global
 		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{335A65F9-21E5-4CB0-A590-F6C12CBC6D83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1715D5AC-8514-40A8-8A7C-C09EBA5E9D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1715D5AC-8514-40A8-8A7C-C09EBA5E9D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1715D5AC-8514-40A8-8A7C-C09EBA5E9D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1715D5AC-8514-40A8-8A7C-C09EBA5E9D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B35D330-1F2A-4D8A-8A7E-F01FB63F3215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B35D330-1F2A-4D8A-8A7E-F01FB63F3215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B35D330-1F2A-4D8A-8A7E-F01FB63F3215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B35D330-1F2A-4D8A-8A7E-F01FB63F3215}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +54,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BB9ECA7A-2A3B-49CC-B6E7-390F2D0128B4} = {23E2D49A-D0ED-476B-82A3-30B66778AB84}
 		{519490E1-59D1-4872-BB60-F85A896CC965} = {847CF37C-CAD8-4BD6-B3D2-461DC5732ECA}
+		{1715D5AC-8514-40A8-8A7C-C09EBA5E9D5F} = {3D4D37CA-D430-4ACE-AEB4-76890AC3EEF1}
+		{1B35D330-1F2A-4D8A-8A7E-F01FB63F3215} = {B6EEB680-BAA8-40B4-A815-FBDCFD3021D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF5CDA28-624F-4E38-ABAC-9D87C66AD349}

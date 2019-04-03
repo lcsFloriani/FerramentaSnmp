@@ -6,10 +6,10 @@ using System.Net;
 
 namespace SnmpTool.Infra.SnmpReader.Equipments
 {
-    public class EquipmentsReaderV3 : IEquipmentReader
+    public class EquipmentReaderV3 : IEquipmentReader
     {
         private readonly SnmpManager _snmpManager;
-        public EquipmentsReaderV3(SnmpManager snmpManager)
+        public EquipmentReaderV3(SnmpManager snmpManager)
         {
             _snmpManager = snmpManager;
         }
