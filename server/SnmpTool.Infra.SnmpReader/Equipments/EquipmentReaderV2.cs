@@ -25,9 +25,33 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0")),
                 Temperature = Convert.ToDouble(GetContentByOId(""))
             };
+            if (equipment.InterfacesCount != 0)
+            {
+                for (int i = 1; i <= equipment.InterfacesCount; i++)
+                    equipment.NetworkInterfaces.Add(GetInterfaceById(i));
+            }
             return equipment;
-        }        
+        }
+        public Interface GetInterfaceById(int interfaceId)
+        {
+            Interface networkInterface = new Interface();
+            try
+            {
+                networkInterface.Index = GetContentByOId($"1.3.6.1.2.1.2.2.1.1.{interfaceId}");
+                networkInterface.Description = GetContentByOId($"1.3.6.1.2.1.2.2.1.2.{interfaceId}");
+                networkInterface.Type = GetContentByOId($"1.3.6.1.2.1.2.2.1.3.{interfaceId}");
+                networkInterface.Speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}"));
+                networkInterface.Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}");
+                networkInterface.AdminStatus = GetContentByOId($" 1.3.6.1.2.1.2.2.1.7.{interfaceId}");
+                networkInterface.OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}");
 
+                return networkInterface;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private string GetContentByOId(string oId)
         {
             var contentToReturn = String.Empty;

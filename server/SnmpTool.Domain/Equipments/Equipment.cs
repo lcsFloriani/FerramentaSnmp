@@ -12,5 +12,10 @@ namespace SnmpTool.Domain.Equipments
         public double Temperature { get; set; }
         public int InterfacesCount { get; set; }
         public List<Interface> NetworkInterfaces { get; set; }
+        
+        public Equipment()
+        {
+            NetworkInterfaces = new List<Interface>();
+        }
     }
 }
