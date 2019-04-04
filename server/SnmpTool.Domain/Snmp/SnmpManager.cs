@@ -2,12 +2,12 @@
 {
     public class SnmpManager
     {
-        public string Ip { get; private set; }
-        public int Port { get; private set; }
-        public SnmpVersionEnum SnmpVersion { get; private set; }
-        public string Community { get; private set; }
-        public int Timeout { get; private set; }
-        public int Retries { get; private set; }
+        public string Ip { get; set; }
+        public int Port { get; set; }
+        public SnmpVersionEnum SnmpVersion { get; set; }
+        public string Community { get; set; }
+        public int Timeout { get; set; }
+        public int Retries { get; set; }
 
         public SnmpManager(string ip, int port, SnmpVersionEnum snmpVersion, string community, int timeout, int retries)
         {

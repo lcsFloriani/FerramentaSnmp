@@ -32,8 +32,16 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             }
             
             return equipment;
-        }        
-        
+        }
+        public InterfaceDetail GetInterfaceDetail(int interfaceId)
+        {
+            return new InterfaceDetail()
+            {
+                UtilizationRate = GetUtilizationRate(interfaceId),
+                DateTime = DateTime.Now
+            };
+
+        }
         public Interface GetInterfaceById(int interfaceId)
         {
             Interface networkInterface = new Interface();
@@ -81,10 +89,32 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                     // jogar exception aqui depois pq deu merda 
                 }
             }
-                
-            result.Pdu.VbList[0].Oid.ToString();
             return contentToReturn;
         }
+        private double GetUtilizationRate(int interfaceId)
+        {
+            var timer = 3000;
+            double speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}"));
 
+            double InOctetsStart = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.10.{interfaceId}"));
+
+            double OutOctetsStart = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.16.{interfaceId}"));
+
+            System.Threading.Thread.Sleep(timer);
+
+            double InOctetsEnd = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.10.{interfaceId}"));
+
+            double OutOctetsEnd = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.16.{interfaceId}"));
+
+            double InOctets = InOctetsEnd - InOctetsStart;
+
+            double OutOctets = OutOctetsEnd - OutOctetsStart;
+
+            double deltaTimer = timer * speed;
+
+            double rate = ((InOctets + OutOctets) / deltaTimer) * (8 * 100);
+
+            return rate;
+        }
     }
 }

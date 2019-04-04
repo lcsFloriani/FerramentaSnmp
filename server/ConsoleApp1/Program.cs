@@ -1,10 +1,9 @@
 ﻿using SnmpTool.Domain.Snmp;
 using SnmpTool.Infra.SnmpReader.Equipments;
-using System;
 
 namespace ConsoleApp1
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
