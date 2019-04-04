@@ -1,1 +1,52 @@
-teste
+<div class="ml-2 mr-2">
+  <form action="">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <span class="title">Snmp Settings</span>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class ="col-form-label" for="ipAddress">IP</label>
+              <input type="text" class="form-control" name="ipAddress" id="ipAddress" formControlName="ipAddress" placeholder="127.0.0.1">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class ="col-form-label" for="port">PORT</label>
+              <input type="text" class="form-control" name="port" id="port" formControlName="port" placeholder="161" value="161">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class ="col-form-label" for="community">COMMUNITY</label>
+              <input type="text" class="form-control" name="community" id="community" formControlName="community" placeholder="public">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class ="col-form-label" for="timeout">TIMEOUT</label>
+              <input type="text" class="form-control" name="timeout" id="timeout" formControlName="timeout" placeholder="5">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class ="col-form-label" for="retries">RETRIES</label>
+              <input type="text" class="form-control" name="retries" id="retries" formControlName="retries" placeholder="1">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class ="col-form-label" for="version">SNMP VERSION</label>
+              <input type="text" class="form-control" name="version" id="version" formControlName="version" placeholder="V2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="float-right">
+        <button type="button" class="btn btn-outline-primary">Get data</button>
+    </div>
+  </form>
+</div>

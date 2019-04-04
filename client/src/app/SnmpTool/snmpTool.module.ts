@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { SnmpManagerComponent } from './SnmpManager/snmpManager.component';
+import { SnmpToolRoutingModule } from './snmpTool-routing.module';
+import { SnmpToolComponent } from './snmpTool.component';
 
 @NgModule({
-    exports: [ SnmpManagerComponent ],
+    exports: [ SnmpManagerComponent, SnmpToolComponent ],
     providers: [],
-    imports: [],
-    declarations: [ SnmpManagerComponent ],
+    imports: [ SnmpToolRoutingModule ],
+    declarations: [ SnmpManagerComponent, SnmpToolComponent ],
 })
 
 export class SnmpToolModule { }
