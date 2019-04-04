@@ -1,5 +1,5 @@
 <div class="ml-2 mr-2">
-  <form action="">
+  <form [formGroup]="formModel">
     <div class="row">
       <div class="col-sm-12">
         <div class="row">
@@ -8,8 +8,8 @@
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="ipAddress">IP</label>
-              <input type="text" class="form-control" name="ipAddress" id="ipAddress" formControlName="ipAddress" placeholder="127.0.0.1">
+              <label class ="col-form-label" for="ip">IP</label>
+              <input type="text" class="form-control" name="ip" id="ip" formControlName="ip" placeholder="127.0.0.1">
             </div>
           </div>
           <div class="col-sm-2">
@@ -27,19 +27,19 @@
           <div class="col-sm-2">
             <div class="form-group">
               <label class ="col-form-label" for="timeout">TIMEOUT</label>
-              <input type="text" class="form-control" name="timeout" id="timeout" formControlName="timeout" placeholder="5">
+              <input type="text" class="form-control" name="timeout" id="timeout" formControlName="timeout">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
               <label class ="col-form-label" for="retries">RETRIES</label>
-              <input type="text" class="form-control" name="retries" id="retries" formControlName="retries" placeholder="1">
+              <input type="text" class="form-control" name="retries" id="retries" formControlName="retries">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
               <label class ="col-form-label" for="version">SNMP VERSION</label>
-              <input type="text" class="form-control" name="version" id="version" formControlName="version" placeholder="V2">
+              <input type="text" class="form-control" name="version" id="version" formControlName="snmpVersion">
             </div>
           </div>
         </div>
@@ -50,3 +50,4 @@
     </div>
   </form>
 </div>
+    {{ formModel.value | json }}
