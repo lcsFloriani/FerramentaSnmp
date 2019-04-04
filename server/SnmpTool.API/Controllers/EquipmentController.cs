@@ -28,7 +28,7 @@ namespace SnmpTool.API.Controllers
 
             return HandleQuery<EquipmentFullQuery, Equipment>(_equipmentService.GetFullEquipment(cmd));
         }
-        [HttpGet]
+        [HttpPost]
         [Route("{id:int}")]
         public IActionResult GetInterfaceDetails(int id, [FromBody]SnmpManagerCommand cmd)
         {
