@@ -1,4 +1,4 @@
-<div class="ml-2 mr-2">
+<div class="ml-3 mr-3">
   <form [formGroup]="formModel">
     <div class="row">
       <div class="col-sm-12">
@@ -8,46 +8,124 @@
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="ip">IP</label>
+              <label class="col-form-label" for="ip">IP</label>
               <input type="text" class="form-control" name="ip" id="ip" formControlName="ip" placeholder="127.0.0.1">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="port">PORT</label>
-              <input type="text" class="form-control" name="port" id="port" formControlName="port" placeholder="161" value="161">
+              <label class="col-form-label" for="port">PORT</label>
+              <input type="text" class="form-control" name="port" id="port" formControlName="port" placeholder="161"
+                value="161">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="community">COMMUNITY</label>
-              <input type="text" class="form-control" name="community" id="community" formControlName="community" placeholder="public">
+              <label class="col-form-label" for="community">COMMUNITY</label>
+              <input type="text" class="form-control" name="community" id="community" formControlName="community"
+                placeholder="public">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="timeout">TIMEOUT</label>
+              <label class="col-form-label" for="timeout">TIMEOUT</label>
               <input type="text" class="form-control" name="timeout" id="timeout" formControlName="timeout">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="retries">RETRIES</label>
+              <label class="col-form-label" for="retries">RETRIES</label>
               <input type="text" class="form-control" name="retries" id="retries" formControlName="retries">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class ="col-form-label" for="version">SNMP VERSION</label>
+              <label class="col-form-label" for="version">SNMP VERSION</label>
               <input type="text" class="form-control" name="version" id="version" formControlName="snmpVersion">
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="float-right form-group">
+              <label class="col-form-label" for="btnGetData"></label>
+              <button type="button" (click)="this.GetData()" id="btnGetData" class="btn btn-outline-primary">Get
+                data</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="float-right">
-        <button type="button" class="btn btn-outline-primary">Get data</button>
-    </div>
   </form>
 </div>
-    {{ formModel.value | json }}
+<div *ngIf="true" class="card text-center">
+  <div class="card-header text-center">
+    Resultado
+  </div>
+  <div class="card-body col-sm-12 text-justify">
+    <div class="row">
+      <div class="col-sm-6">
+        <div>
+          <span>Descrição</span>
+        </div>
+        <div class="truncate ml-3">
+          <span title="{{ equipment?.description }}" class="font-weight-light"> {{ equipment?.description }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div>
+          <span>Contato</span>
+        </div>
+        <div class="truncate ml-3">
+          <span title="{{ equipment?.contact }}" class="font-weight-light"> {{ equipment?.contact }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div>
+          <span>Nome</span>
+        </div>
+        <div class="truncate ml-3">
+          <span title="{{ equipment?.name }}" class="font-weight-light"> {{ equipment?.name }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div>
+          <span>Localização</span>
+        </div>
+        <div class="truncate ml-3">
+          <span title="{{ equipment?.location }}" class="font-weight-light"> {{ equipment?.location }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div>
+          <span>Tempo de atividade</span>
+        </div>
+        <div class="truncate ml-3">
+          <span title="{{ equipment?.upTime }}" class="font-weight-light"> {{ equipment?.upTime }}</span>
+        </div>
+      </div>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="col-sm-4">
+      <div class="text-left">
+        <span>Selecione a Interface a ser monitorada: </span>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-4">
+          <ng-select [items]="data" bindLabel="description"
+            [(ngModel)]="this.interface" (update)="this.updateSelectedInterface($event)">
+            <ng-template ng-label-tmp let-item="item">
+              {{ item.description }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+      <button type="button" (click)="this.startInterfaceMonitor()" id="btnStartInterfaceMonitor"
+        class="btn btn-outline-primary">Start Monitor</button>
+    </div>
+  </div>
+</div>
+{{ interface | json }}

@@ -18,7 +18,7 @@ namespace SnmpTool.API.Controllers
         {
             _equipmentService = equipmentService;
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetEquipment([FromBody]SnmpManagerCommand cmd)
         {
             ValidationResult validationResult = cmd.Validate();
