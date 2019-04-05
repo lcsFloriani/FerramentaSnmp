@@ -4,44 +4,44 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-12">
-            <span class="title">Snmp Settings</span>
+            <span class="font-weight-light">Snmp Settings</span>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label" for="ip">IP</label>
-              <input type="text" class="form-control" name="ip" id="ip" formControlName="ip" placeholder="127.0.0.1">
+              <label class="col-form-label font-weight-bold" for="ip">IP</label>
+              <input type="text" class="form-control form-control-sm" name="ip" id="ip" formControlName="ip" placeholder="127.0.0.1">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label" for="port">PORT</label>
-              <input type="text" class="form-control" name="port" id="port" formControlName="port" placeholder="161"
+              <label class="col-form-label font-weight-bold" for="port">PORT</label>
+              <input type="text" class="form-control form-control-sm" name="port" id="port" formControlName="port" placeholder="161"
                 value="161">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label" for="community">COMMUNITY</label>
-              <input type="text" class="form-control" name="community" id="community" formControlName="community"
+              <label class="col-form-label font-weight-bold" for="community">COMMUNITY</label>
+              <input type="text" class="form-control form-control-sm" name="community" id="community" formControlName="community"
                 placeholder="public">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label" for="timeout">TIMEOUT</label>
-              <input type="text" class="form-control" name="timeout" id="timeout" formControlName="timeout">
+              <label class="col-form-label font-weight-bold" for="timeout">TIMEOUT</label>
+              <input type="text" class="form-control form-control-sm" name="timeout" id="timeout" formControlName="timeout">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label" for="retries">RETRIES</label>
-              <input type="text" class="form-control" name="retries" id="retries" formControlName="retries">
+              <label class="col-form-label font-weight-bold" for="retries">RETRIES</label>
+              <input type="text" class="form-control form-control-sm" name="retries" id="retries" formControlName="retries">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label" for="version">SNMP VERSION</label>
-              <input type="text" class="form-control" name="version" id="version" formControlName="snmpVersion">
+              <label class="col-form-label font-weight-bold" for="version">SNMP VERSION</label>
+              <input type="text" class="form-control form-control-sm" name="version" id="version" formControlName="snmpVersion">
             </div>
           </div>
           <div class="col-sm-12">
@@ -56,7 +56,7 @@
     </div>
   </form>
 </div>
-<div *ngIf="true" class="card text-center">
+<div *ngIf="equipment" class="card text-center">
   <div class="card-header text-center">
     Resultado
   </div>
@@ -128,4 +128,4 @@
     </div>
   </div>
 </div>
-{{ interface | json }}
+<interface-details [interface]="interface"></interface-details>
