@@ -59,4 +59,4 @@
         </div>
     </div>
 </div>
-<interface-usage [interface]="this.interface" [snmpManager]="this.snmpManager"></interface-usage>
+<interface-usage *ngIf="interface" [interface]="interface" [snmpManager]="snmpManager"></interface-usage>

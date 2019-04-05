@@ -37,13 +37,13 @@ export class InterfaceUsageComponent implements OnInit {
     public chartPlugins = [];
 
     updateChart(): void {
-        console.log(this.interface);
         let interfaceDetails: InterfaceDetail;
         this.chartData.forEach((x, i) => {
             this.snmpService
                 .getInterfaceDetails(this.snmpManager, parseInt(this.interface.index))
                 .take(1)
-                .subscribe((a: InterfaceDetail) => interfaceDetails = a);
+                .subscribe((result) => interfaceDetails = result);
+
                 const data: number[] = x.data as number[];
                 data.push(parseFloat(interfaceDetails.utilizationRate.toFixed(2)));
         });

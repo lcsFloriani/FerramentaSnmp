@@ -18,7 +18,7 @@ export class SnmpService extends BaseService {
             .map((response: Equipment) => response);
     }
     public getInterfaceDetails(snmpManagerCommand: SnmpManagerCommand, interfaceId: number): Observable<InterfaceDetail> {
-        return this.getWithBody(`${this.api}api/equipment/${interfaceId}`, snmpManagerCommand)
+        return this.httpClient.post(`${this.api}api/equipment/${interfaceId}`, snmpManagerCommand)
                                 .map((response: InterfaceDetail) => response);
     }
 }
