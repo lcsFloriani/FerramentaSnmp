@@ -17,7 +17,6 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
         }
         public Equipment GetEquipment()
         {
-            var teste  = GetContentByOId("1.3.6.1.2.1.2.1.0");
             var equipment = new Equipment
             {
                 Description = GetContentByOId("1.3.6.1.2.1.1.1.0"),
@@ -26,8 +25,15 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 Name = GetContentByOId("1.3.6.1.2.1.1.5.0"),
                 UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
                 InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"))
-                //Temperature = Convert.ToDouble(GetContentByOId(""))
             };
+            try
+            {
+                equipment.Temperature = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.12.8"));
+            }
+            catch
+            {
+                equipment.Temperature = 0;
+            }
             if (equipment.InterfacesCount != 0)
             {
                 for (int i = 1; i <= equipment.InterfacesCount; i++)
