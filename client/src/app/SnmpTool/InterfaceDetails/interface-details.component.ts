@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Interface } from '../shared/equipment.model';
+import { Interface, SnmpManagerCommand } from '../shared/equipment.model';
 
 @Component({
     selector: 'interface-details',
@@ -8,4 +8,5 @@ import { Interface } from '../shared/equipment.model';
 
 export class InterfaceDetailsComponent { 
     @Input() public interface: Interface;
+    @Input() public snmpManager: SnmpManagerCommand;
 }

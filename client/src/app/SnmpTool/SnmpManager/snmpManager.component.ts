@@ -1,4 +1,4 @@
-import { SnmpManagerCommand, Equipment, Interface } from './../shared/equipment.model';
+import { SnmpManagerCommand, Equipment, Interface, SnmpManager } from './../shared/equipment.model';
 import { SnmpService } from './../shared/snmp.service';
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -13,6 +13,7 @@ export class SnmpManagerComponent {
     public data: any;
     public equipment: Equipment;
     public interface: Interface;
+    public snmpManager: SnmpManagerCommand;
     constructor(public snmpService: SnmpService) { }
 
     public GetData(): void {
@@ -20,6 +21,7 @@ export class SnmpManagerComponent {
         this.snmpService.get(snmpManager)
                 .take(1)
                 .subscribe((eq: Equipment) => this.updateEquips(eq));
+        this.snmpManager = snmpManager;               
     }
     public startInterfaceMonitor(): void {
         //
