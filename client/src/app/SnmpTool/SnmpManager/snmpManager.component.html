@@ -19,20 +19,20 @@
                 value="161">
             </div>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="community">COMMUNITY</label>
               <input type="text" class="form-control form-control-sm" name="community" id="community" formControlName="community"
                 placeholder="public">
             </div>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="timeout">TIMEOUT</label>
               <input type="text" class="form-control form-control-sm" name="timeout" id="timeout" formControlName="timeout">
             </div>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="retries">RETRIES</label>
               <input type="text" class="form-control form-control-sm" name="retries" id="retries" formControlName="retries">
@@ -42,6 +42,13 @@
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="version">SNMP VERSION</label>
               <input type="text" class="form-control form-control-sm" name="version" id="version" formControlName="snmpVersion">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class="col-form-label font-weight-bold" for="interval">Intervalo de monitoração da interface</label>
+              <input type="number" class="form-control form-control-sm" name="interval" id="interval" formControlName="interval"> 
+              <span class="font-weight-light float-right">Segundos</span>
             </div>
           </div>
           <div class="col-sm-12">
@@ -121,9 +128,9 @@
               {{ item.description }}
             </ng-template>
           </ng-select>
-        </div>
+        </div>        
       </div>
     </div>
   </div>
 </div>
-<interface-details *ngIf="interface" [interface]="interface" [snmpManager]="snmpManager"></interface-details>
+<app-interface-details *ngIf="interface" [interface]="interface" [snmpManager]="snmpManager"></app-interface-details>

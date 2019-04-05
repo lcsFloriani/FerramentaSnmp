@@ -59,7 +59,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 networkInterface.Type = GetContentByOId($"1.3.6.1.2.1.2.2.1.3.{interfaceId}");
                 networkInterface.Speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}"));
                 networkInterface.Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}");
-                networkInterface.AdminStatus = GetContentByOId($" 1.3.6.1.2.1.2.2.1.7.{interfaceId}");
+                networkInterface.AdminStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.7.{interfaceId}");
                 networkInterface.OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}");
 
                 return networkInterface;

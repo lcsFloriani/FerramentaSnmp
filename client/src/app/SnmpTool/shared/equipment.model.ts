@@ -15,6 +15,7 @@ export class SnmpManager {
     timeout: number;
     retries: number;
     snmpVersion: SnmpVersionEnum;
+    interval: number;
 }
 
 export class Interface {
@@ -35,7 +36,11 @@ export class InterfaceDetail {
         this.dateTime = new Date(aux);
     }
 }
-
+export enum statusEnum {
+    UP = '1',
+    DOWN = '2',
+    TESTING = '3'
+}
 export class SnmpManagerCommand {
     ip: string;
     port: number;
@@ -43,6 +48,7 @@ export class SnmpManagerCommand {
     timeout: number;
     retries: number;
     snmpVersion: SnmpVersionEnum;
+    interval: number;
     constructor(snmpManager: SnmpManager) {
         this.ip = snmpManager.ip;
         this.port = snmpManager.port;
@@ -50,6 +56,7 @@ export class SnmpManagerCommand {
         this.timeout = snmpManager.timeout;
         this.retries = snmpManager.retries;
         this.snmpVersion = snmpManager.snmpVersion;
+        this.interval = snmpManager.interval;
     }
 }
 export enum SnmpVersionEnum {

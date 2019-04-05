@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Interface, SnmpManagerCommand } from '../shared/equipment.model';
 
 @Component({
-    selector: 'interface-details',
+    selector: 'app-interface-details',
     templateUrl: './interface-details.component.html'
 })
 

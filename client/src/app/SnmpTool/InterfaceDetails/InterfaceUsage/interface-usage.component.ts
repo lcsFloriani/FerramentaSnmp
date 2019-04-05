@@ -45,23 +45,23 @@ export class InterfaceUsageComponent implements AfterContentInit {
         this.currentDetails.dateTime = new Date();
         this.currentDetails.utilizationRate = 0;
 
-        Observable.interval(5000)
-            .takeWhile(() => this.interface !== undefined)
+        Observable.interval(this.snmpManager.interval * 1000)
+            .takeWhile(() => true)
             .subscribe(() => this.updateChart());
     }
     updateChart(): void {
-        console.log(this.currentDetails);
         this.chartData.forEach((x, i) => {
             this.snmpService
                 // tslint:disable-next-line: radix
                 .getInterfaceDetails(this.snmpManager, parseInt(this.interface.index))
                 .take(1)
-                .subscribe((result: InterfaceDetail) => { this.currentDetails = Object.assign(new InterfaceDetail(), result); });
+                .subscribe((result: InterfaceDetail) => {
+                    this.currentDetails = Object.assign(new InterfaceDetail(), result);
+                    this.chartLabels.push(`${new Date().toLocaleString()}`);
+                });
 
             const data: number[] = x.data as number[];
-            console.log(this.currentDetails);
             data.push(parseFloat(this.currentDetails.utilizationRate.toPrecision(2)) * 100);
         });
-        this.chartLabels.push(`Data: ${new Date().toLocaleString()}`);
     }
 }

@@ -12,6 +12,7 @@ export class SnmpToolComponent {
         community: ['public', Validators.required],
         timeout: ['', Validators.required],
         retries: ['', Validators.required],
+        interval: ['', Validators.required],
         snmpVersion: ['', Validators.required],
     });
 

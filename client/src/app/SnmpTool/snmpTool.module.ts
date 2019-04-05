@@ -10,6 +10,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { InterfaceDetailsComponent } from './InterfaceDetails/interface-details.component';
 import { InterfaceUsageComponent } from './InterfaceDetails/InterfaceUsage/interface-usage.component';
 import { ChartsModule } from 'ng2-charts';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
     exports: [
         SnmpManagerComponent,
@@ -19,14 +20,15 @@ import { ChartsModule } from 'ng2-charts';
     ],
     providers: [ SnmpService ],
     imports: [
-        CommonModule,
+        SharedModule,
         SnmpToolRoutingModule,
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         FormsModule,
         NgSelectModule,
-        ChartsModule
+        ChartsModule,
+        SharedModule
     ],
-    declarations: [ 
+    declarations: [
         SnmpManagerComponent,
         SnmpToolComponent,
         InterfaceDetailsComponent,
