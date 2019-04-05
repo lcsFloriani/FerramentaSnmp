@@ -12,4 +12,5 @@ Ferramenta desenvolvida para matéria de gerencia de redes
 #Back-end
 - oId da temperatura.
 - Verificar casos de erro.
+- Status administrativo.
 - A aplicação deve apresentar também, de forma numérica, o “percentual de erro de entrada/saída” e o “percentual de descartes de entrada/saída” da interface.
