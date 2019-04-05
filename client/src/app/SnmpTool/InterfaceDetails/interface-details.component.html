@@ -9,7 +9,7 @@
                     <span>Index</span>
                 </div>
                 <div class="truncate ml-3">
-                    <span title="{{ interface?.Index }}" class="font-weight-light">
+                    <span title="{{ interface?.index }}" class="font-weight-light">
                         {{ interface?.index }}</span>
                 </div>
             </div>
@@ -59,4 +59,4 @@
         </div>
     </div>
 </div>
-<interface-usage *ngIf="interface" [interface]="interface" [snmpManager]="snmpManager"></interface-usage>
+<interface-usage *ngIf="interface" [interface]="this.interface" [snmpManager]="snmpManager"></interface-usage>

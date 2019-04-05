@@ -123,9 +123,7 @@
           </ng-select>
         </div>
       </div>
-      <button type="button" (click)="this.startInterfaceMonitor()" id="btnStartInterfaceMonitor"
-        class="btn btn-outline-primary">Start Monitor</button>
     </div>
   </div>
 </div>
-<interface-details [interface]="interface" [snmpManager]="snmpManager"></interface-details>
+<interface-details *ngIf="interface" [interface]="interface" [snmpManager]="snmpManager"></interface-details>

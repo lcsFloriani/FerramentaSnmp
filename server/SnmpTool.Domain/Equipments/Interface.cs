@@ -10,5 +10,9 @@
         public string Mac { get; set; }
         public string AdminStatus { get; set; }
         public string OperationalStatus { get; set; }
+        
+        public Interface()
+        {
+        }
     }
 }

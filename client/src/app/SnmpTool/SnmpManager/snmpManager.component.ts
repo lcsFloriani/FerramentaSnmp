@@ -21,7 +21,7 @@ export class SnmpManagerComponent {
         this.snmpService.get(snmpManager)
                 .take(1)
                 .subscribe((eq: Equipment) => this.updateEquips(eq));
-        this.snmpManager = snmpManager;               
+        this.snmpManager = snmpManager;
     }
     public startInterfaceMonitor(): void {
         //

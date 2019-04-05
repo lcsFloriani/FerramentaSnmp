@@ -6,7 +6,7 @@ import { Interface, SnmpManagerCommand } from '../shared/equipment.model';
     templateUrl: './interface-details.component.html'
 })
 
-export class InterfaceDetailsComponent { 
+export class InterfaceDetailsComponent {
     @Input() public interface: Interface;
     @Input() public snmpManager: SnmpManagerCommand;
 }

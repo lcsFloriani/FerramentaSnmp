@@ -11,26 +11,26 @@ import { InterfaceDetailsComponent } from './InterfaceDetails/interface-details.
 import { InterfaceUsageComponent } from './InterfaceDetails/InterfaceUsage/interface-usage.component';
 import { ChartsModule } from 'ng2-charts';
 @NgModule({
-    exports: [ 
-        SnmpManagerComponent, 
-        SnmpToolComponent, 
-        InterfaceDetailsComponent, 
-        InterfaceUsageComponent 
+    exports: [
+        SnmpManagerComponent,
+        SnmpToolComponent,
+        InterfaceDetailsComponent,
+        InterfaceUsageComponent
     ],
     providers: [ SnmpService ],
-    imports: [ 
-        CommonModule, 
-        SnmpToolRoutingModule, 
+    imports: [
+        CommonModule,
+        SnmpToolRoutingModule,
         ReactiveFormsModule, 
-        FormsModule, 
-        NgSelectModule, 
-        ChartsModule 
+        FormsModule,
+        NgSelectModule,
+        ChartsModule
     ],
     declarations: [ 
-        SnmpManagerComponent, 
-        SnmpToolComponent, 
-        InterfaceDetailsComponent, 
-        InterfaceUsageComponent 
+        SnmpManagerComponent,
+        SnmpToolComponent,
+        InterfaceDetailsComponent,
+        InterfaceUsageComponent
     ],
 })
 

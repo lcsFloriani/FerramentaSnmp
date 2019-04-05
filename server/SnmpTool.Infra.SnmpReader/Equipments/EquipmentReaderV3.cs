@@ -3,6 +3,7 @@ using SnmpTool.Domain.Equipments;
 using SnmpTool.Domain.Snmp;
 using System;
 using System.Net;
+using System.Threading;
 
 namespace SnmpTool.Infra.SnmpReader.Equipments
 {
@@ -100,28 +101,35 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
         }
         private double GetUtilizationRate(int interfaceId)
         {
-            var timer = 3000;
+            var timer = 1000;
             double speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}"));
 
             double InOctetsStart = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.10.{interfaceId}"));
 
             double OutOctetsStart = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.16.{interfaceId}"));
 
-            System.Threading.Thread.Sleep(timer);
+            Thread.Sleep(timer);
 
             double InOctetsEnd = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.10.{interfaceId}"));
 
             double OutOctetsEnd = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.16.{interfaceId}"));
 
-            double InOctets = InOctetsEnd - InOctetsStart;
+            while (InOctetsStart == InOctetsEnd)
+            {
+                Thread.Sleep(timer);
+                InOctetsEnd = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.10.{interfaceId}"));
+            }
 
-            double OutOctets = OutOctetsEnd - OutOctetsStart;
+            while (OutOctetsStart == OutOctetsEnd)
+            {
+                Thread.Sleep(timer);
+                OutOctetsEnd = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.16.{interfaceId}"));
+            }
 
-            double deltaTimer = timer * speed;
 
-            double rate = ((InOctets + OutOctets) / deltaTimer) * (8 * 100);
+            double rate = (((InOctetsEnd - InOctetsStart) + (OutOctetsEnd - OutOctetsStart)) / (timer * speed)) * (8 * 100);
 
-            return rate;
+            return rate * 100;
         }
     }
 }

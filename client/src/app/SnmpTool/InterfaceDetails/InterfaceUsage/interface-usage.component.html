@@ -1,5 +1,7 @@
-<div style="display: block;">
-    <canvas baseChart width="400" height="400"
+<div class="col-sm-12" style="display: block;">
+  <div class="row">
+    <div class="col-sm-6">
+      <canvas baseChart 
       [datasets]="chartData"
       [labels]="chartLabels"
       [options]="chartOptions"
@@ -8,5 +10,11 @@
       [chartType]="chartType"
       [plugins]="chartPlugins">
     </canvas>
+    </div>
+    <div class="col-sm-6">
+      {{ interface | json }}
+    </div>
+  </div>
+    
   </div>
   

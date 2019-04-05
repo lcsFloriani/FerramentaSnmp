@@ -62,7 +62,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 networkInterface.Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}");
                 networkInterface.AdminStatus = GetContentByOId($" 1.3.6.1.2.1.2.2.1.7.{interfaceId}");
                 networkInterface.OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}");
-
+                
                 return networkInterface;
             }
             catch (Exception)

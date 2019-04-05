@@ -29,7 +29,11 @@ export class Interface {
 
 export class InterfaceDetail {
     utilizationRate: number;
-    DateTime: Date;
+    dateTime: Date;
+    constructor() {
+        const aux = this.dateTime;
+        this.dateTime = new Date(aux);
+    }
 }
 
 export class SnmpManagerCommand {

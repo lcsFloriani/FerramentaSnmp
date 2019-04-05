@@ -1,27 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, AfterContentInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Interface, SnmpManagerCommand, InterfaceDetail } from '../../shared/equipment.model';
-import { Observable } from 'rxjs-compat';
 import { SnmpService } from '../../shared/snmp.service';
+import { Observable } from 'rxjs-compat';
 
 @Component({
+    // tslint:disable-next-line: component-selector
     selector: 'interface-usage',
     templateUrl: './interface-usage.component.html'
 })
 
-export class InterfaceUsageComponent implements OnInit {
+export class InterfaceUsageComponent implements AfterContentInit {
     @Input() public interface: Interface;
     @Input() public snmpManager: SnmpManagerCommand;
-    constructor(public snmpService: SnmpService) { }
-    public ngOnInit() {
-        Observable.interval(1000)
-            .takeWhile(() => true)
-            .subscribe(() => this.updateChart());
-    }
-    public chartData: ChartDataSets[] = [
-        { data: [], label: 'uso em %' },
-    ];
+
+    public currentDetails: InterfaceDetail;
+
+    public chartData: ChartDataSets[];
     public chartLabels: Label[] = [];
     public chartOptions: (ChartOptions) = {
         responsive: true,
@@ -36,17 +32,36 @@ export class InterfaceUsageComponent implements OnInit {
     public chartType = 'line';
     public chartPlugins = [];
 
+    constructor(public snmpService: SnmpService) {
+
+    }
+    public ngAfterContentInit() {
+        this.chartData = [
+            { data: [ 0 ], label: this.interface.description },
+        ];
+        this.chartLabels.push(new Date().toLocaleString());
+
+        this.currentDetails = new InterfaceDetail();
+        this.currentDetails.dateTime = new Date();
+        this.currentDetails.utilizationRate = 0;
+
+        Observable.interval(5000)
+            .takeWhile(() => this.interface !== undefined)
+            .subscribe(() => this.updateChart());
+    }
     updateChart(): void {
-        let interfaceDetails: InterfaceDetail;
+        console.log(this.currentDetails);
         this.chartData.forEach((x, i) => {
             this.snmpService
+                // tslint:disable-next-line: radix
                 .getInterfaceDetails(this.snmpManager, parseInt(this.interface.index))
                 .take(1)
-                .subscribe((result) => interfaceDetails = result);
+                .subscribe((result: InterfaceDetail) => { this.currentDetails = Object.assign(new InterfaceDetail(), result); });
 
-                const data: number[] = x.data as number[];
-                data.push(parseFloat(interfaceDetails.utilizationRate.toFixed(2)));
+            const data: number[] = x.data as number[];
+            console.log(this.currentDetails);
+            data.push(parseFloat(this.currentDetails.utilizationRate.toPrecision(2)) * 100);
         });
-        this.chartLabels.push(`label ${interfaceDetails.DateTime}`)
+        this.chartLabels.push(`Data: ${new Date().toLocaleString()}`);
     }
 }
