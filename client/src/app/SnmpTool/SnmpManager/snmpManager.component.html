@@ -9,52 +9,176 @@
           <div class="col-sm-2">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="ip">IP</label>
-              <input type="text" class="form-control form-control-sm" name="ip" id="ip" formControlName="ip" placeholder="127.0.0.1">
+              <input type="text" class="form-control form-control-sm" name="ip" id="ip" formControlName="ip"
+                placeholder="IPv4">
+              <div>
+                <label class="col-form-label font-weight-light" for="ip">
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('ip').hasError('required') && formModel.get('ip').touched">
+                      Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('ip').hasError('invalidIpV4') && formModel.get('ip').touched">
+                      Valor informado não é um ip valido
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="port">PORT</label>
-              <input type="text" class="form-control form-control-sm" name="port" id="port" formControlName="port" placeholder="161"
-                value="161">
+              <input type="text" class="form-control form-control-sm" name="port" id="port" formControlName="port"
+                placeholder="161">
+              <div>
+                <label class="col-form-label font-weight-light" for="port">
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('port').hasError('required') && formModel.get('port').touched">
+                      Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('port').hasError('invalidNumber') && formModel.get('port').touched">
+                      Valor informado não é um número valido
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
           <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="community">COMMUNITY</label>
-              <input type="text" class="form-control form-control-sm" name="community" id="community" formControlName="community"
-                placeholder="public">
+              <input type="text" class="form-control form-control-sm" name="community" id="community"
+                formControlName="community">
+            </div>
+            <div>
+              <label class="col-form-label font-weight-light" for="community">
+                <div>
+                  <span class="input-error"
+                    *ngIf="formModel.get('community').hasError('required') && formModel.get('community').touched">
+                    Campo obrigatório
+                  </span>
+                </div>
+              </label>
             </div>
           </div>
           <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="timeout">TIMEOUT</label>
-              <input type="text" class="form-control form-control-sm" name="timeout" id="timeout" formControlName="timeout">
+              <input type="text" class="form-control form-control-sm" name="timeout" id="timeout"
+                formControlName="timeout" min="1">
+              <div>
+                <label class="col-form-label font-weight-light" for="timeout">
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('timeout').hasError('required') && formModel.get('timeout').touched">
+                      Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('timeout').hasError('invalidNumber') && formModel.get('timeout').touched">
+                      Número invalido
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('timeout').hasError('min') && formModel.get('timeout').touched">
+                      O valor deve ser maior que 0
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
           <div class="col-sm-1">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="retries">RETRIES</label>
-              <input type="text" class="form-control form-control-sm" name="retries" id="retries" formControlName="retries">
+              <input type="text" class="form-control form-control-sm" name="retries" id="retries"
+                formControlName="retries" min="1">
+              <div>
+                <label class="col-form-label font-weight-light" for="retries">
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('retries').hasError('required') && formModel.get('retries').touched">
+                      Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('retries').hasError('invalidNumber') && formModel.get('retries').touched">
+                      Valor informado não é um número valido
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('retries').hasError('min') && formModel.get('retries').touched">
+                      O valor deve ser maior que 0
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="version">SNMP VERSION</label>
-              <input type="text" class="form-control form-control-sm" name="version" id="version" formControlName="snmpVersion">
+              <ng-select [items]="versionList" name="version" id="version" formControlName="snmpVersion"> </ng-select>
+              <div>
+                <label class="col-form-label font-weight-light" for="version">
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('snmpVersion').hasError('required') && formModel.get('snmpVersion').touched">
+                      Campo obrigatório
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label font-weight-bold" for="interval">Intervalo de monitoração da interface</label>
-              <input type="number" class="form-control form-control-sm" name="interval" id="interval" formControlName="interval"> 
+              <label class="col-form-label font-weight-bold" for="interval">Intervalo de monitoração da
+                interface</label>
+              <input type="text" class="form-control form-control-sm" name="interval" id="interval"
+                formControlName="interval" min="10">
               <span class="font-weight-light float-right">Segundos</span>
+              <div>
+                <label class="col-form-label font-weight-light" for="version">
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('interval').hasError('required') && formModel.get('interval').touched">
+                      Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('interval').hasError('invalidNumber') && formModel.get('interval').touched">
+                      Valor informado não é um número valido
+                    </span>
+                  </div>
+                  <div>
+                    <span class="input-error"
+                      *ngIf="formModel.get('interval').hasError('min') && formModel.get('interval').touched">
+                      Intervalo deve ser maior que 9
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="float-right form-group">
               <label class="col-form-label" for="btnGetData"></label>
-              <button type="button" (click)="this.GetData()" id="btnGetData" class="btn btn-outline-primary">Get
+              <button (click)="this.GetData()" id="btnGetData" class="btn btn-outline-primary"
+                [disabled]="formModel.invalid">Get
                 data</button>
             </div>
           </div>
@@ -122,13 +246,13 @@
     <div class="col-sm-12">
       <div class="row">
         <div class="col-sm-4">
-          <ng-select [items]="data" bindLabel="description"
-            [(ngModel)]="this.interface" (update)="this.updateSelectedInterface($event)">
+          <ng-select [items]="data" bindLabel="description" [(ngModel)]="this.interface"
+            (update)="this.updateSelectedInterface($event)">
             <ng-template ng-label-tmp let-item="item">
               {{ item.description }}
             </ng-template>
           </ng-select>
-        </div>        
+        </div>
       </div>
     </div>
   </div>

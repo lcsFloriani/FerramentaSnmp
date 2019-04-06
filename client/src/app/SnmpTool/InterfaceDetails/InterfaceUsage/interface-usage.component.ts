@@ -1,9 +1,10 @@
-import { Component, Input, AfterContentInit } from '@angular/core';
+import { Component, Input, AfterContentInit, OnDestroy } from '@angular/core';
+
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Interface, SnmpManagerCommand, InterfaceDetail } from '../../shared/equipment.model';
 import { SnmpService } from '../../shared/snmp.service';
-import { Observable } from 'rxjs-compat';
+import { Observable, Subject } from 'rxjs-compat';
 
 @Component({
     // tslint:disable-next-line: component-selector
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs-compat';
     templateUrl: './interface-usage.component.html'
 })
 
-export class InterfaceUsageComponent implements AfterContentInit {
+export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
     @Input() public interface: Interface;
     @Input() public snmpManager: SnmpManagerCommand;
 
@@ -24,17 +25,18 @@ export class InterfaceUsageComponent implements AfterContentInit {
     };
     public chartColors: Color[] = [
         {
-            borderColor: 'blue',
+            borderColor: 'grey',
             backgroundColor: 'rgba(255,0,0,0.3)',
         },
     ];
     public chartLegend = true;
     public chartType = 'line';
     public chartPlugins = [];
+    
+    private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-    constructor(public snmpService: SnmpService) {
+    constructor(public snmpService: SnmpService) { }
 
-    }
     public ngAfterContentInit() {
         this.chartData = [
             { data: [ 0 ], label: this.interface.description },
@@ -49,6 +51,11 @@ export class InterfaceUsageComponent implements AfterContentInit {
             .takeWhile(() => true)
             .subscribe(() => this.updateChart());
     }
+    public ngOnDestroy(): void {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
+
     updateChart(): void {
         this.chartData.forEach((x, i) => {
             this.snmpService
@@ -61,7 +68,7 @@ export class InterfaceUsageComponent implements AfterContentInit {
                 });
 
             const data: number[] = x.data as number[];
-            data.push(parseFloat(this.currentDetails.utilizationRate.toPrecision(2)) * 100);
+            data.push(parseFloat(this.currentDetails.utilizationRate.toFixed(2)));
         });
-    }
+    }    
 }

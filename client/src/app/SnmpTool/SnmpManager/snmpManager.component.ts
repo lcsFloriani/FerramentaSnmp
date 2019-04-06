@@ -1,7 +1,8 @@
-import { SnmpManagerCommand, Equipment, Interface, SnmpManager } from './../shared/equipment.model';
+import { SnmpManagerCommand, Equipment, Interface, SnmpManager, SnmpVersionEnum } from './../shared/equipment.model';
 import { SnmpService } from './../shared/snmp.service';
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { EnumValues } from 'enum-values';
 
 @Component({
     selector: 'app-snmpmanager',
@@ -11,16 +12,19 @@ import { FormGroup } from '@angular/forms';
 export class SnmpManagerComponent {
     @Input() public formModel: FormGroup;
     public data: any;
+    public versionList: any[];
     public equipment: Equipment;
     public interface: Interface;
     public snmpManager: SnmpManagerCommand;
-    constructor(public snmpService: SnmpService) { }
+    constructor(public snmpService: SnmpService) {
+        this.versionList = EnumValues.getValues(SnmpVersionEnum);
+    }
 
     public GetData(): void {
         const snmpManager: SnmpManagerCommand = new SnmpManagerCommand(this.formModel.value);
         this.snmpService.get(snmpManager)
-                .take(1)
-                .subscribe((eq: Equipment) => this.updateEquips(eq));
+            .take(1)
+            .subscribe((eq: Equipment) => this.updateEquips(eq));
         this.snmpManager = snmpManager;
     }
     public startInterfaceMonitor(): void {
