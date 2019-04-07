@@ -10,7 +10,7 @@ Ferramenta desenvolvida para matéria de gerencia de redes
 - A aplicação deve apresentar também, de forma numérica, o “percentual de erro de entrada/saída” e o “percentual de descartes de entrada/saída” da interface.
 - [DONE]Status administrativo.
 - [DONE]intervalo entre as leituras
-- Criar custom validators
+- [DONE]Criar custom validators
 
 #Back-end
 - oId da temperatura.
