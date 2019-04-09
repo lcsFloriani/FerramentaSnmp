@@ -40,7 +40,6 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
         this.chartData = [
             { data: [0], label: this.interface.description },
         ];
-        this.chartLabels.push(this.currentDetails.dateTime.toLocaleString());
 
         this.currentDetails = new InterfaceDetail();
         this.currentDetails.dateTime = new Date();
@@ -48,7 +47,9 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
         this.currentDetails.discardIn = 0;
         this.currentDetails.discardOut = 0;
         this.currentDetails.errorIn = 0;
-        this.currentDetails.errorOut;
+        this.currentDetails.errorOut = 0;
+
+        this.chartLabels.push(this.currentDetails.dateTime.toLocaleString());
 
         Observable.interval(this.snmpManager.interval * 1000)
             .takeWhile(() => true)
