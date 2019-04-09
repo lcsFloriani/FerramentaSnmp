@@ -9,20 +9,20 @@
           <div class="col-sm-2">
             <div class="form-group">
               <label class="col-form-label font-weight-bold" for="ip">IP</label>
-              <input type="text" class="form-control form-control-sm" name="ip" id="ip" formControlName="ip"
-                placeholder="IPv4">
+              <input [ngClass]="(formModel.get('ip').invalid) ? ':invalid':':valid'" type="text"
+                class="form-control form-control-sm" name="ip" id="ip" formControlName="ip" placeholder="IPv4">
               <div>
                 <label class="col-form-label font-weight-light" for="ip">
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('ip').hasError('required') && formModel.get('ip').touched">
-                      Campo obrigatório
+                      - Campo obrigatório
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('ip').hasError('invalidIpV4') && formModel.get('ip').touched">
-                      Valor informado não é um ip valido
+                      - Valor informado não é um ip valido
                     </span>
                   </div>
                 </label>
@@ -37,15 +37,21 @@
               <div>
                 <label class="col-form-label font-weight-light" for="port">
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('port').hasError('required') && formModel.get('port').touched">
-                      Campo obrigatório
+                      - Campo obrigatório
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('port').hasError('invalidNumber') && formModel.get('port').touched">
-                      Valor informado não é um número valido
+                      - Valor informado não é um número valido
+                    </span>
+                  </div>
+                  <div>
+                    <span class="label-error"
+                      *ngIf="formModel.get('timeout').hasError('min') && formModel.get('timeout').touched">
+                      - O valor deve ser maior que 0
                     </span>
                   </div>
                 </label>
@@ -61,9 +67,9 @@
             <div>
               <label class="col-form-label font-weight-light" for="community">
                 <div>
-                  <span class="input-error"
+                  <span class="label-error"
                     *ngIf="formModel.get('community').hasError('required') && formModel.get('community').touched">
-                    Campo obrigatório
+                    - Campo obrigatório
                   </span>
                 </div>
               </label>
@@ -77,21 +83,21 @@
               <div>
                 <label class="col-form-label font-weight-light" for="timeout">
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('timeout').hasError('required') && formModel.get('timeout').touched">
-                      Campo obrigatório
+                      - Campo obrigatório
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('timeout').hasError('invalidNumber') && formModel.get('timeout').touched">
-                      Número invalido
+                      - Número invalido
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('timeout').hasError('min') && formModel.get('timeout').touched">
-                      O valor deve ser maior que 0
+                      - O valor deve ser maior que 0
                     </span>
                   </div>
                 </label>
@@ -106,21 +112,21 @@
               <div>
                 <label class="col-form-label font-weight-light" for="retries">
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('retries').hasError('required') && formModel.get('retries').touched">
-                      Campo obrigatório
+                      - Campo obrigatório
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('retries').hasError('invalidNumber') && formModel.get('retries').touched">
-                      Valor informado não é um número valido
+                      - Valor informado não é um número valido
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('retries').hasError('min') && formModel.get('retries').touched">
-                      O valor deve ser maior que 0
+                      - O valor deve ser maior que 0
                     </span>
                   </div>
                 </label>
@@ -134,9 +140,9 @@
               <div>
                 <label class="col-form-label font-weight-light" for="version">
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('snmpVersion').hasError('required') && formModel.get('snmpVersion').touched">
-                      Campo obrigatório
+                      - Campo obrigatório
                     </span>
                   </div>
                 </label>
@@ -153,21 +159,21 @@
               <div>
                 <label class="col-form-label font-weight-light" for="version">
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('interval').hasError('required') && formModel.get('interval').touched">
-                      Campo obrigatório
+                      - Campo obrigatório
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('interval').hasError('invalidNumber') && formModel.get('interval').touched">
-                      Valor informado não é um número valido
+                      - Valor informado não é um número valido
                     </span>
                   </div>
                   <div>
-                    <span class="input-error"
+                    <span class="label-error"
                       *ngIf="formModel.get('interval').hasError('min') && formModel.get('interval').touched">
-                      Intervalo deve ser maior que 9
+                      - Intervalo deve ser maior que 9
                     </span>
                   </div>
                 </label>

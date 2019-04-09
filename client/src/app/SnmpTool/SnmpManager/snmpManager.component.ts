@@ -17,7 +17,7 @@ export class SnmpManagerComponent {
     public interface: Interface;
     public snmpManager: SnmpManagerCommand;
     constructor(public snmpService: SnmpService) {
-        this.versionList = EnumValues.getValues(SnmpVersionEnum);
+        this.versionList = EnumValues.getValues(SnmpVersionEnum);        
     }
 
     public GetData(): void {

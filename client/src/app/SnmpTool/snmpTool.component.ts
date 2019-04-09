@@ -10,7 +10,7 @@ import { IpValidator } from '../shared/validators/ip.validator';
 export class SnmpToolComponent {
     public form: FormGroup = this.fb.group({
         ip: ['', [Validators.required, IpValidator.ipV4]],
-        port: ['', [Validators.required, NumberValidator.isNumber]],
+        port: ['', [Validators.required, NumberValidator.isNumber, Validators.min(1)]],
         community: ['public', Validators.required],
         timeout: ['', [Validators.required, NumberValidator.isNumber, Validators.min(1)]],
         retries: ['', [Validators.required, NumberValidator.isNumber, Validators.min(1)]],

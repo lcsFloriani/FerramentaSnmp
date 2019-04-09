@@ -6,7 +6,6 @@ import { statusEnum } from 'src/app/SnmpTool/shared/equipment.model';
 /* tslint:disable */
 export class StatusEnumPipe implements PipeTransform {
     public transform(value: any): any {
-        console.log(EnumValues.getNameFromValue(statusEnum, value));
         return EnumValues.getNameFromValue(statusEnum, value);
     }
 }

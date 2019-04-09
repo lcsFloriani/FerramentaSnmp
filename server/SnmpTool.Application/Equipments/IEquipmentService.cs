@@ -7,8 +7,7 @@ namespace SnmpTool.Application.Equipments
 {
     public interface IEquipmentService
     {
-        EquipmentFullQuery GetFullEquipment(SnmpManagerCommand cmd);
-        EquipmentResumedQuery GetResumedEquipment(SnmpManagerCommand cmd);
+        EquipmentFullQuery GetFullEquipment(SnmpManagerCommand cmd);        
         InterfaceDetail GetInterfaceById(SnmpManagerCommand snmpManager, int interfaceId);
     }
 }

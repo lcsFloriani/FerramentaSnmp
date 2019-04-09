@@ -1,4 +1,4 @@
-import { Component, Input, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, Input, AfterContentInit, OnDestroy, OnInit } from '@angular/core';
 
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
@@ -32,20 +32,23 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
     public chartLegend = true;
     public chartType = 'line';
     public chartPlugins = [];
-    
+
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(public snmpService: SnmpService) { }
-
     public ngAfterContentInit() {
         this.chartData = [
-            { data: [ 0 ], label: this.interface.description },
+            { data: [0], label: this.interface.description },
         ];
-        this.chartLabels.push(new Date().toLocaleString());
+        this.chartLabels.push(this.currentDetails.dateTime.toLocaleString());
 
         this.currentDetails = new InterfaceDetail();
         this.currentDetails.dateTime = new Date();
         this.currentDetails.utilizationRate = 0;
+        this.currentDetails.discardIn = 0;
+        this.currentDetails.discardOut = 0;
+        this.currentDetails.errorIn = 0;
+        this.currentDetails.errorOut;
 
         Observable.interval(this.snmpManager.interval * 1000)
             .takeWhile(() => true)
@@ -55,7 +58,6 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
     }
-
     updateChart(): void {
         this.chartData.forEach((x, i) => {
             this.snmpService
@@ -70,5 +72,5 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
             const data: number[] = x.data as number[];
             data.push(parseFloat(this.currentDetails.utilizationRate.toFixed(2)));
         });
-    }    
+    }
 }

@@ -31,6 +31,11 @@ export class Interface {
 export class InterfaceDetail {
     utilizationRate: number;
     dateTime: Date;
+    errorIn: number;
+    errorOut: number;
+    discardIn: number;
+    discardOut: number;
+    
     constructor() {
         const aux = this.dateTime;
         this.dateTime = new Date(aux);
@@ -61,6 +66,6 @@ export class SnmpManagerCommand {
 }
 export enum SnmpVersionEnum {
     V1 = "V1",
-    V2 = "V2",
-    V3 = "V3"
+    V2 = "V2"
+    //V3 = "V3"
 }

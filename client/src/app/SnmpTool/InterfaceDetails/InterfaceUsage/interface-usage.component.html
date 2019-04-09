@@ -1,20 +1,43 @@
 <div class="col-sm-12" style="display: block;">
   <div class="row">
     <div class="col-sm-6">
-      <canvas baseChart 
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [colors]="chartColors"
-      [legend]="chartLegend"
-      [chartType]="chartType"
-      [plugins]="chartPlugins">
-    </canvas>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"
+        [legend]="chartLegend" [chartType]="chartType" [plugins]="chartPlugins">
+      </canvas>
     </div>
     <div class="col-sm-6">
-      {{ interface | json }}
+      <div class="row">
+        <div class="col-sm-12">
+          <span>- Taxa de Utilização: </span>
+          <span title="{{ currentDetails.utilizationRate }}" class="font-weight-light">
+            {{ currentDetails?.utilizationRate }} %</span>
+        </div>
+        <div class="col-sm-12">
+          <span>- Taxa de erro de entrada: </span>
+          <span title="{{ currentDetails.errorIn }}" class="font-weight-light">
+            {{ currentDetails?.errorIn }} %</span>
+        </div>
+        <div class="col-sm-12">
+          <span>- Taxa de erro de saida: </span>
+          <span title="{{ currentDetails.errorOut }}" class="font-weight-light">
+            {{ currentDetails?.errorOut }} %</span>
+        </div>
+        <div class="col-sm-12">
+          <span>- Taxa de descarte de entrada: </span>
+          <span title="{{ currentDetails.errorOut }}" class="font-weight-light">
+            {{ currentDetails?.discardIn }} %</span>
+        </div>
+        <div class="col-sm-12">
+          <span>- Taxa de descarte de saida: </span>
+          <span title="{{ currentDetails.errorOut }}" class="font-weight-light">
+            {{ currentDetails?.discardOut }} %</span>
+        </div>
+        <div class="col-sm-12">
+          <span>- Ultima verificação: </span>
+          <span title="{{ currentDetails.dateTime }}" class="font-weight-light">
+            {{ currentDetails?.dateTime.toLocaleString() }}</span>
+        </div>
+      </div>
     </div>
   </div>
-    
-  </div>
-  
+</div>
