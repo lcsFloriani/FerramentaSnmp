@@ -2,6 +2,8 @@
 Ferramenta desenvolvida para matéria de gerencia de redes
 
 
+- .NET Core 2.2 / Angular 7 - NG-Lightning w/ Lightning Design System and RxJS
+
 -ToDo List
 
 #Front-end
