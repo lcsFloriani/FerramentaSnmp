@@ -67,10 +67,11 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
                 .take(1)
                 .subscribe((result: InterfaceDetail) => {
                     this.currentDetails = Object.assign(new InterfaceDetail(), result);
-                    this.chartLabels.push(`${new Date().toLocaleString()}`);
                 });
 
             const data: number[] = x.data as number[];
+
+            this.chartLabels.push(`${this.currentDetails.dateTime.toLocaleString()}`);
             data.push(parseFloat(this.currentDetails.utilizationRate.toFixed(2)));
         });
     }

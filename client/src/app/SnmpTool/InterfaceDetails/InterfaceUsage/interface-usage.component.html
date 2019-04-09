@@ -6,6 +6,7 @@
       </canvas>
     </div>
     <div class="col-sm-6">
+      {{ currentDetails | json }}
       <div class="row">
         <div class="col-sm-12">
           <span>- Taxa de Utilização: </span>
@@ -34,7 +35,7 @@
         </div>
         <div class="col-sm-12">
           <span>- Ultima verificação: </span>
-          <span title="{{ currentDetails.dateTime }}" class="font-weight-light">
+          <span title="{{ currentDetails?.dateTime.toLocaleString() }}" class="font-weight-light">
             {{ currentDetails?.dateTime.toLocaleString() }}</span>
         </div>
       </div>

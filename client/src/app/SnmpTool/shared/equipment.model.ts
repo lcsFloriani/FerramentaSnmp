@@ -37,8 +37,7 @@ export class InterfaceDetail {
     discardOut: number;
 
     constructor() {
-        const aux = this.dateTime;
-        this.dateTime = new Date(aux);
+        this.dateTime = new Date();
     }
 }
 export enum statusEnum {

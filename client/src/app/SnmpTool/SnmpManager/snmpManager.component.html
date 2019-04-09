@@ -8,9 +8,12 @@
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label class="col-form-label font-weight-bold" for="ip">IP</label>
-              <input [ngClass]="(formModel.get('ip').invalid) ? ':invalid':':valid'" type="text"
-                class="form-control form-control-sm" name="ip" id="ip" formControlName="ip" placeholder="IPv4">
+                <div class="slds-col_padded">
+                    <ng-template #IP><i>IP</i></ng-template>
+                      <ngl-input label="IP" fieldLevelHelpTooltip="Informe o IP do dispositivo">
+                      <input ngl type="input" formControlName="ip" name="ip" id="ip">
+                    </ngl-input>
+                  </div>
               <div>
                 <label class="col-form-label font-weight-light" for="ip">
                   <div>

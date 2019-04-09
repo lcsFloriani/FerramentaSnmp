@@ -10,6 +10,7 @@ import { InterfaceDetailsComponent } from './InterfaceDetails/interface-details.
 import { InterfaceUsageComponent } from './InterfaceDetails/InterfaceUsage/interface-usage.component';
 import { ChartsModule } from 'ng2-charts';
 import { SharedModule } from '../shared/shared.module';
+import {NglModule, NGL_ICON_CONFIG, NglIconConfig} from 'ng-lightning';
 @NgModule({
     exports: [
         SnmpManagerComponent,
@@ -17,7 +18,10 @@ import { SharedModule } from '../shared/shared.module';
         InterfaceDetailsComponent,
         InterfaceUsageComponent
     ],
-    providers: [ SnmpService ],
+    providers: [
+        SnmpService,
+        { provide: NGL_ICON_CONFIG, useValue: { svgPath: '/my/path' } as NglIconConfig },
+    ],
     imports: [
         SharedModule,
         SnmpToolRoutingModule,
@@ -25,7 +29,8 @@ import { SharedModule } from '../shared/shared.module';
         FormsModule,
         NgSelectModule,
         ChartsModule,
-        SharedModule
+        SharedModule,
+        NglModule
     ],
     declarations: [
         SnmpManagerComponent,
