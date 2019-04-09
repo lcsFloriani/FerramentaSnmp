@@ -23,6 +23,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
+              { "glob": "**/*", "input": "node_modules/@salesforce-ux/design-system/assets/", "output": "/assets" },
               "src/favicon.ico",
               "src/assets"
             ],

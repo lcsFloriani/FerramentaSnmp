@@ -20,7 +20,6 @@ import {NglModule, NGL_ICON_CONFIG, NglIconConfig} from 'ng-lightning';
     ],
     providers: [
         SnmpService,
-        { provide: NGL_ICON_CONFIG, useValue: { svgPath: '/my/path' } as NglIconConfig },
     ],
     imports: [
         SharedModule,
