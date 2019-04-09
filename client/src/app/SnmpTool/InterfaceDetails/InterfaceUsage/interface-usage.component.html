@@ -9,32 +9,32 @@
       <div class="row">
         <div class="col-sm-12">
           <span>- Taxa de Utilização: </span>
-          <span title="{{ currentDetails.utilizationRate }}" class="font-weight-light">
+          <span title="{{ currentDetails?.utilizationRate }}" class="font-weight-light">
             {{ currentDetails?.utilizationRate }} %</span>
         </div>
         <div class="col-sm-12">
           <span>- Taxa de erro de entrada: </span>
-          <span title="{{ currentDetails.errorIn }}" class="font-weight-light">
+          <span title="{{ currentDetails?.errorIn }}" class="font-weight-light">
             {{ currentDetails?.errorIn }} %</span>
         </div>
         <div class="col-sm-12">
           <span>- Taxa de erro de saida: </span>
-          <span title="{{ currentDetails.errorOut }}" class="font-weight-light">
+          <span title="{{ currentDetails?.errorOut }}" class="font-weight-light">
             {{ currentDetails?.errorOut }} %</span>
         </div>
         <div class="col-sm-12">
           <span>- Taxa de descarte de entrada: </span>
-          <span title="{{ currentDetails.errorOut }}" class="font-weight-light">
+          <span title="{{ currentDetails?.errorOut }}" class="font-weight-light">
             {{ currentDetails?.discardIn }} %</span>
         </div>
         <div class="col-sm-12">
           <span>- Taxa de descarte de saida: </span>
-          <span title="{{ currentDetails.errorOut }}" class="font-weight-light">
+          <span title="{{ currentDetails?.errorOut }}" class="font-weight-light">
             {{ currentDetails?.discardOut }} %</span>
         </div>
         <div class="col-sm-12">
           <span>- Ultima verificação: </span>
-          <span title="{{ currentDetails.dateTime }}" class="font-weight-light">
+          <span title="{{ currentDetails?.dateTime.toLocaleString() }}" class="font-weight-light">
             {{ currentDetails?.dateTime.toLocaleString() }}</span>
         </div>
       </div>

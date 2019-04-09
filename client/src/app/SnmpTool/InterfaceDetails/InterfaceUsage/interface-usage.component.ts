@@ -40,7 +40,6 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
         this.chartData = [
             { data: [0], label: this.interface.description },
         ];
-        this.chartLabels.push(this.currentDetails.dateTime.toLocaleString());
 
         this.currentDetails = new InterfaceDetail();
         this.currentDetails.dateTime = new Date();
@@ -49,6 +48,8 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
         this.currentDetails.discardOut = 0;
         this.currentDetails.errorIn = 0;
         this.currentDetails.errorOut;
+
+        this.chartLabels.push(this.currentDetails.dateTime.toLocaleString());
 
         Observable.interval(this.snmpManager.interval * 1000)
             .takeWhile(() => true)
@@ -65,11 +66,11 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
                 .getInterfaceDetails(this.snmpManager, parseInt(this.interface.index))
                 .take(1)
                 .subscribe((result: InterfaceDetail) => {
-                    this.currentDetails = Object.assign(new InterfaceDetail(), result);
-                    this.chartLabels.push(`${new Date().toLocaleString()}`);
+                    this.currentDetails = Object.assign(new InterfaceDetail(), result);                    
                 });
 
             const data: number[] = x.data as number[];
+            this.chartLabels.push(`${new Date().toLocaleString()}`);
             data.push(parseFloat(this.currentDetails.utilizationRate.toFixed(2)));
         });
     }
