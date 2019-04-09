@@ -47,7 +47,7 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
         this.currentDetails.discardIn = 0;
         this.currentDetails.discardOut = 0;
         this.currentDetails.errorIn = 0;
-        this.currentDetails.errorOut;
+        this.currentDetails.errorOut = 0;
 
         this.chartLabels.push(this.currentDetails.dateTime.toLocaleString());
 
@@ -70,7 +70,7 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
                 });
 
             const data: number[] = x.data as number[];
-            this.chartLabels.push(`${new Date().toLocaleString()}`);
+            this.chartLabels.push(`${this.currentDetails.dateTime.toLocaleString()}`);
             data.push(parseFloat(this.currentDetails.utilizationRate.toFixed(2)));
         });
     }

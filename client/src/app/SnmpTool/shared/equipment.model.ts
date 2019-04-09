@@ -35,11 +35,6 @@ export class InterfaceDetail {
     errorOut: number;
     discardIn: number;
     discardOut: number;
-    
-    constructor() {
-        const aux = this.dateTime;
-        this.dateTime = new Date(aux);
-    }
 }
 export enum statusEnum {
     UP = '1',
