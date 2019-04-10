@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SnmpToolComponent } from './snmpTool.component';
+
+import { SnmpToolComponent } from './snmp-tool.component';
 
 const snmpRoutes: Routes = [
     {
@@ -15,6 +16,4 @@ const snmpRoutes: Routes = [
     providers: [],
 })
 
-export class SnmpToolRoutingModule {
-
-}
+export class SnmpToolRoutingModule { }

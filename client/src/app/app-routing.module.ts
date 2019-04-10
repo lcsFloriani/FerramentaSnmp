@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'snmp',
-    loadChildren: './SnmpTool/snmpTool.module#SnmpToolModule',
+    loadChildren: './features/snmp-tool/snmp-tool.module#SnmpToolModule',
   }
 ];
 

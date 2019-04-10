@@ -1,0 +1,192 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="formModel">
+        <div class="form-row">
+          <div class="col-md-2 mb-2">
+            <div class="form-group">
+              <ngl-input label="Endereço IPV4" fieldLevelHelpTooltip="Endereço IP do dispositivo">
+                <input ngl type="input" formControlName="ip" name="ip" id="ip">
+              </ngl-input>
+              <div class="form-group">
+                <label class="col-form-label font-weight-light" for="ip">
+                  <div>
+                    <span class="label-error"
+                      *ngIf="formModel.get('ip').hasError('required') && formModel.get('ip').touched">
+                      - Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="label-error"
+                      *ngIf="formModel.get('ip').hasError('invalidIpV4') && formModel.get('ip').touched">
+                      - Valor informado não é um ip valido
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 mb-1">
+            <div class="form-group">
+              <ngl-input label="Porta" fieldLevelHelpTooltip="Porta de conexão, snmp default: 161">
+                <input ngl type="input" formControlName="port" name="port" id="port">
+              </ngl-input>
+              <div>
+                <label class="col-form-label font-weight-light" for="port">
+                  <div>
+                    <span class="label-error"
+                      *ngIf="formModel.get('port').hasError('required') && formModel.get('port').touched">
+                      - Campo obrigatório
+                    </span>
+                  </div>
+                  <div>
+                    <span class="label-error"
+                      *ngIf="formModel.get('port').hasError('invalidNumber') && formModel.get('port').touched">
+                      - Valor informado não é um número valido
+                    </span>
+                  </div>
+                  <div>
+                    <span class="label-error"
+                      *ngIf="formModel.get('port').hasError('min') && formModel.get('port').touched">
+                      - O valor deve ser maior que 0
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 mb-2">
+            <div class="form-group">
+              <ngl-input label="Community" fieldLevelHelpTooltip="Comunidade SNMP">
+                <input ngl type="input" formControlName="community" name="community" id="community">
+              </ngl-input>
+              <label class="col-form-label font-weight-light" for="community">
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('community').hasError('required') && formModel.get('community').touched">
+                    - Campo obrigatório
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-1 mb-1">
+            <div class="form-group">
+              <ngl-input label="Timeout" fieldLevelHelpTooltip="Tempo de espera para o dispositivo responder">
+                <input ngl type="input" formControlName="timeout" name="timeout" id="timeout">
+              </ngl-input>
+              <label class="col-form-label font-weight-light" for="timeout">
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('timeout').hasError('required') && formModel.get('timeout').touched">
+                    - Campo obrigatório
+                  </span>
+                </div>
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('timeout').hasError('invalidNumber') && formModel.get('timeout').touched">
+                    - Valor informado não é um número valido
+                  </span>
+                </div>
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('timeout').hasError('min') && formModel.get('timeout').touched">
+                    - O valor deve ser maior que 0
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-1 mb-1">
+            <div class="form-group">
+              <ngl-input label="Retries" fieldLevelHelpTooltip="Número de tentativas">
+                <input ngl type="input" formControlName="retries" name="retries" id="retries">
+              </ngl-input>
+              <label class="col-form-label font-weight-light" for="retries">
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('retries').hasError('required') && formModel.get('retries').touched">
+                    - Campo obrigatório
+                  </span>
+                </div>
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('retries').hasError('invalidNumber') && formModel.get('retries').touched">
+                    - Valor informado não é um número valido
+                  </span>
+                </div>
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('retries').hasError('min') && formModel.get('retries').touched">
+                    - O valor deve ser maior que 0
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2 mb-2">
+            <div class="form-group">
+              <ngl-select label="Versão do SNMP" fieldLevelHelpTooltip="V1, V2C ou V3*">
+                <select ngl formControlName="snmpVersion" name="snmpVersion" id="snmpVersion">
+                  <option value="">Selecione a versão ..</option>
+                  <option value="V1">V1</option>
+                  <option value="V2">V2c</option>
+                </select>
+              </ngl-select>
+              <label class="col-form-label font-weight-light" for="snmpVersion">
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('snmpVersion').hasError('required') && formModel.get('snmpVersion').touched">
+                    - Campo obrigatório
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2 mb-2">
+            <div class="form-group">
+              <ngl-input label="Intervalo de monitoração"
+                fieldLevelHelpTooltip="Intervalo de monitoração da interface em segundos">
+                <input ngl type="input" formControlName="interval" name="interval" id="interval">
+              </ngl-input>
+              <label class="col-form-label font-weight-light" for="interval">
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('interval').hasError('required') && formModel.get('interval').touched">
+                    - Campo obrigatório
+                  </span>
+                </div>
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('interval').hasError('invalidNumber') && formModel.get('interval').touched">
+                    - Valor informado não é um número valido
+                  </span>
+                </div>
+                <div>
+                  <span class="label-error"
+                    *ngIf="formModel.get('interval').hasError('min') && formModel.get('interval').touched">
+                    - O valor deve ser maior que 10
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-1 mb-1">
+            <div class="form-group">
+              <div class="">
+                <br>
+                <button type="button" nglButton variant="inverse" (click)="this.GetData()"
+                  [disabled]="formModel.invalid">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12" *ngIf="equipment">
+      <ngl-expandable-section [(open)]="open" title="Informações do dispositivo" [collapsable]="collapsable">
+          <app-device-info [equipment]="equipment"></app-device-info> 
+      </ngl-expandable-section>
+    </div>
+  </div>
+</div>
