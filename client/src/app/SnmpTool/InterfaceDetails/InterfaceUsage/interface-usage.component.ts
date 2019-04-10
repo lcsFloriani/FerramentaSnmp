@@ -66,10 +66,11 @@ export class InterfaceUsageComponent implements AfterContentInit, OnDestroy {
                 .getInterfaceDetails(this.snmpManager, parseInt(this.interface.index))
                 .take(1)
                 .subscribe((result: InterfaceDetail) => {
-                    this.currentDetails = Object.assign(new InterfaceDetail(), result);                    
+                    this.currentDetails = Object.assign(new InterfaceDetail(), result);
                 });
 
             const data: number[] = x.data as number[];
+
             this.chartLabels.push(`${this.currentDetails.dateTime.toLocaleString()}`);
             data.push(parseFloat(this.currentDetails.utilizationRate.toFixed(2)));
         });

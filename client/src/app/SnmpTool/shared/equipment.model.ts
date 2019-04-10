@@ -35,6 +35,10 @@ export class InterfaceDetail {
     errorOut: number;
     discardIn: number;
     discardOut: number;
+
+    constructor() {
+        this.dateTime = new Date();
+    }
 }
 export enum statusEnum {
     UP = '1',
@@ -60,7 +64,7 @@ export class SnmpManagerCommand {
     }
 }
 export enum SnmpVersionEnum {
-    V1 = "V1",
-    V2 = "V2"
-    //V3 = "V3"
+    V1 = 'V1',
+    V2 = 'V2'
+    // V3 = 'V3'
 }

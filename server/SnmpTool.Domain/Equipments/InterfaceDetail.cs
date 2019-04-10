@@ -5,7 +5,6 @@ namespace SnmpTool.Domain.Equipments
     public class InterfaceDetail
     {
         public double UtilizationRate { get; set; }
-        public DateTime DateTime { get; set; }
         public double ErrorIn { get; set; }
         public double ErrorOut { get; set; }
         public double DiscardIn { get; set; }

@@ -45,7 +45,6 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
         {
             return new InterfaceDetail()
             {
-                DateTime = DateTime.Now,
                 UtilizationRate = GetUtilizationRate(interfaceId),
                 DiscardIn = GetDiscardIn(interfaceId),
                 DiscardOut = GetDiscardOut(interfaceId),
