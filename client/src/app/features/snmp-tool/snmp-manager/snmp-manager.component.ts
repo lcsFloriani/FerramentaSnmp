@@ -18,7 +18,7 @@ export class SnmpManagerComponent {
 
     open = true;
     collapsable = true;
-    
+
     constructor(public snmpService: SnmpService) { }
 
     public GetData(): void {

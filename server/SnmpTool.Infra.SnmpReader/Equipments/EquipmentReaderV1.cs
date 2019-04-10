@@ -2,6 +2,7 @@
 using SnmpTool.Domain.Equipments;
 using SnmpTool.Domain.Snmp;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 
@@ -24,14 +25,9 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
                 InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"))
             };
-            try
-            {
-                equipment.Temperature = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.12.8"));
-            }
-            catch
-            {
-                equipment.Temperature = 0;
-            }
+            equipment.Memory = TryGetMemoryUsage();
+            equipment.Cpu = TryGetCpuUsage();
+
             if (equipment.InterfacesCount != 0)
             {
                 for (int i = 1; i <= equipment.InterfacesCount; i++)
@@ -39,6 +35,34 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             }
 
             return equipment;
+        }
+        private double TryGetMemoryUsage()
+        {
+            double memory = 0;
+            try
+            {
+                // Tenta capturar direto nos oId do Switch HP
+                memory = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.8.8"));
+            }
+            catch { memory = 0; }
+
+            if(memory == 0)
+            {
+                try { memory = GetMemoryInUseLinux(); }
+                catch { memory = 0; }
+            }
+            return memory;
+        }
+        private double TryGetCpuUsage()
+        {
+            double cpu = 0;
+            try
+            {
+                // Tenta capturar direto nos oId do Switch HP
+                cpu = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.6.8"));
+            }
+            catch { cpu = 0; }
+            return cpu;
         }
 
         public InterfaceDetail GetInterfaceDetail(int interfaceId)
@@ -144,5 +168,8 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
         private double GetDiscardOut(int interfaceId)
             => Math.Round(Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.19.{interfaceId}")) /
                 (Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.17.{interfaceId}")) + Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.18.{interfaceId}"))), 2);
+        private double GetMemoryInUseLinux()        
+           => Math.Round((((Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.5.0")) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.6.0"))) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.14.0")) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.15.0")) 
+               / Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.5.0"))) * 100));        
     }
 }

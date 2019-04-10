@@ -41,5 +41,21 @@
                 <span title="{{ equipment?.upTime }}" class="font-weight-light"> {{ equipment?.upTime }}</span>
             </div>
         </div>
+        <div class="col-sm-6" *ngIf="equipment?.memory" >
+            <div>
+                <span>Uso de memória</span>
+            </div>
+            <div>
+                <span title="{{ equipment?.memory }}" class="font-weight-light"> {{ equipment?.memory }}</span>
+            </div>
+        </div>
+        <div class="col-sm-6" *ngIf="equipment?.cpu" >
+            <div>
+                <span>Uso de CPU</span>
+            </div>
+            <div>
+                <span title="{{ equipment?.cpu }}" class="font-weight-light"> {{ equipment?.cpu }}</span>
+            </div>
+        </div>
     </div>
 </div>

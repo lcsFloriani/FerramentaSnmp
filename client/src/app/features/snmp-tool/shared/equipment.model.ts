@@ -3,6 +3,8 @@ export class Equipment {
     contact: string;
     name: string;
     location: string;
+    cpu: number;
+    memory: number;
     upTime: string;
     interfacesCount: number;
     networkInterfaces: Interface[] = [];
