@@ -27,6 +27,7 @@ namespace SnmpTool.API
 
             services.AddTransient<IEquipmentService, EquipmentService>();
 
+            
             AutoMapperInitializer.Initialize();
             services.BuildServiceProvider();
         }
@@ -38,6 +39,7 @@ namespace SnmpTool.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseMvc();
         }

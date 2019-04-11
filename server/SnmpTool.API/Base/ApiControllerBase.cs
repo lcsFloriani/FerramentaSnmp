@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Extensions;
@@ -7,6 +8,7 @@ using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
 using SnmpTool.API.Exceptions;
 using SnmpTool.Domain.Exceptions;
+using SnmpTool.Domain.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +18,18 @@ namespace SnmpTool.API.Base
 {
     public class ApiControllerBase : ControllerBase
     {
-        protected IActionResult HandleCallback<TSuccess>(TSuccess data)
-               => Ok(data);
-
-        protected IActionResult HandleQuery<TSource, TResult>(TSource result)
-            => Ok(Mapper.Map<TSource, TResult>(result));
-
+        public IActionResult HandleCommand<TFailure, TSuccess>(Result<TFailure, TSuccess> callback) where TFailure : Exception
+        {
+            return callback.IsFailure ? HandleFailure(callback.Failure) : Ok(callback.Success);
+        }
+        public IActionResult HandleCallback<TFailure, TSuccess>(Result<TFailure, TSuccess> callback) where TFailure : Exception
+        {
+            return callback.IsFailure ? HandleFailure(callback.Failure) : Ok(callback.Success);
+        }
+        public IActionResult HandleQuery<TSource, TResult>(Result<Exception, TSource> callback)
+        {
+            return callback.IsFailure ? HandleFailure(callback.Failure) : Ok(Mapper.Map<TSource, TResult>(callback.Success));
+        }
         protected IActionResult HandleQueryable<TQueryOptions, TResult>(IQueryable<TQueryOptions> query, ODataQueryOptions<TQueryOptions> queryOptions)
         {
             return Ok(HandlePageResult<TQueryOptions, TResult>(query, queryOptions));
@@ -40,9 +48,13 @@ namespace SnmpTool.API.Base
 
             return pageResult;
         }
-        protected IActionResult HandleFailure<T>(T exceptionToHandle) where T : Exception
+        public IActionResult HandleFailure<T>(T exceptionToHandle) where T : Exception
         {
+            if (exceptionToHandle is ValidationException)
+                return StatusCode(HttpStatusCode.BadRequest.GetHashCode(), (exceptionToHandle as ValidationException).Errors);
+
             var exceptionPayload = PayLoadException.New(exceptionToHandle);
+
             return exceptionToHandle is BusinessException ?
                 StatusCode(HttpStatusCode.BadRequest.GetHashCode(), exceptionPayload) :
                 StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), exceptionPayload);

@@ -1,8 +1,11 @@
-﻿namespace SnmpTool.Domain.Equipments
+﻿using SnmpTool.Domain.Results;
+using System;
+
+namespace SnmpTool.Domain.Equipments
 {
     public interface IEquipmentReader
     {
-        Equipment GetEquipment();
-        InterfaceDetail GetInterfaceDetail(int interfaceId);
+        Result<Exception, Equipment> GetEquipment();
+        Result<Exception, InterfaceDetail> GetInterfaceDetail(int interfaceId);
     }
 }

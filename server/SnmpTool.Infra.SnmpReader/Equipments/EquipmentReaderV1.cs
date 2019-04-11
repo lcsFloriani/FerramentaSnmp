@@ -1,8 +1,8 @@
 ﻿using SnmpSharpNet;
 using SnmpTool.Domain.Equipments;
+using SnmpTool.Domain.Results;
 using SnmpTool.Domain.Snmp;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 
@@ -11,10 +11,10 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
     public class EquipmentReaderV1 : IEquipmentReader
     {
         private readonly SnmpManager _snmpManager;
-        public EquipmentReaderV1(SnmpManager snmpManager) 
+        public EquipmentReaderV1(SnmpManager snmpManager)
             => _snmpManager = snmpManager;
 
-        public Equipment GetEquipment()
+        public Result<Exception, Equipment> GetEquipment()
         {
             var equipment = new Equipment
             {
@@ -23,49 +23,46 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 Location = GetContentByOId("1.3.6.1.2.1.1.6.0"),
                 Name = GetContentByOId("1.3.6.1.2.1.1.5.0"),
                 UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
-                InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"))
             };
+
             equipment.Memory = TryGetMemoryUsage();
             equipment.Cpu = TryGetCpuUsage();
-
-            if (equipment.InterfacesCount != 0)
+            try
+            {
+                equipment.InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"));
+            }
+            catch
+            {
+                equipment.InterfacesCount = -1;
+            }
+            if (equipment.InterfacesCount > 0)
             {
                 for (int i = 1; i <= equipment.InterfacesCount; i++)
-                    equipment.NetworkInterfaces.Add(GetInterfaceById(i));
+                    equipment.NetworkInterfaces.Add(GetInternalInterfaceById(i));
             }
+            if (equipment.InterfacesCount == -1)
+            {
+                bool noerrors = true;
+                int index = 1;
+                while (noerrors)
+                {
+                    try
+                    {
+                        equipment.NetworkInterfaces.Add(GetInternalInterfaceById(index));
+                        index++;
+                    }
+                    catch
+                    {
+                        noerrors = false;
+                    }
 
+                }
+            }
             return equipment;
         }
-        private double TryGetMemoryUsage()
-        {
-            double memory = 0;
-            try
-            {
-                // Tenta capturar direto nos oId do Switch HP
-                memory = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.8.8"));
-            }
-            catch { memory = 0; }
 
-            if(memory == 0)
-            {
-                try { memory = GetMemoryInUseLinux(); }
-                catch { memory = 0; }
-            }
-            return memory;
-        }
-        private double TryGetCpuUsage()
-        {
-            double cpu = 0;
-            try
-            {
-                // Tenta capturar direto nos oId do Switch HP
-                cpu = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.6.8"));
-            }
-            catch { cpu = 0; }
-            return cpu;
-        }
 
-        public InterfaceDetail GetInterfaceDetail(int interfaceId)
+        public Result<Exception, InterfaceDetail> GetInterfaceDetail(int interfaceId)
         {
             return new InterfaceDetail()
             {
@@ -77,7 +74,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             };
         }
 
-        public Interface GetInterfaceById(int interfaceId)
+        public Result<Exception, Interface> GetInterfaceById(int interfaceId)
         {
             return new Interface()
             {
@@ -90,7 +87,47 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}")
             };
         }
+        private double TryGetMemoryUsage()
+        {
+            double memory = 0;
+            try
+            {
+                // Tenta capturar direto nos oId do Switch HP
+                memory = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.8.8"));
+            }
+            catch { memory = 0; }
 
+            if (memory == 0)
+            {
+                try { memory = GetMemoryInUseLinux(); }
+                catch { memory = 0; }
+            }
+            return memory;
+        }
+        private Interface GetInternalInterfaceById(int interfaceId)
+        {
+            return new Interface()
+            {
+                Index = GetContentByOId($"1.3.6.1.2.1.2.2.1.1.{interfaceId}"),
+                Description = GetContentByOId($"1.3.6.1.2.1.2.2.1.2.{interfaceId}"),
+                Type = GetContentByOId($"1.3.6.1.2.1.2.2.1.3.{interfaceId}"),
+                Speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}")),
+                Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}"),
+                AdminStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.7.{interfaceId}"),
+                OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}")
+            };
+        }
+        private double TryGetCpuUsage()
+        {
+            double cpu = 0;
+            try
+            {
+                // Tenta capturar direto nos oId do Switch HP
+                cpu = Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.25506.2.6.1.1.1.1.6.8"));
+            }
+            catch { cpu = 0; }
+            return cpu;
+        }
         private string GetContentByOId(string oId)
         {
             var contentToReturn = String.Empty;
@@ -168,8 +205,8 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
         private double GetDiscardOut(int interfaceId)
             => Math.Round(Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.19.{interfaceId}")) /
                 (Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.17.{interfaceId}")) + Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.18.{interfaceId}"))), 2);
-        private double GetMemoryInUseLinux()        
-           => Math.Round((((Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.5.0")) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.6.0"))) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.14.0")) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.15.0")) 
-               / Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.5.0"))) * 100));        
+        private double GetMemoryInUseLinux()
+           => Math.Round((((Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.5.0")) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.6.0"))) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.14.0")) - Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.15.0"))
+               / Convert.ToDouble(GetContentByOId("1.3.6.1.4.1.2021.4.5.0"))) * 100));
     }
 }

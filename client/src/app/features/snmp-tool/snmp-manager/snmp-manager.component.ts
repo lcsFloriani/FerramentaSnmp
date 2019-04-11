@@ -26,7 +26,8 @@ export class SnmpManagerComponent {
         const snmpManager: SnmpManagerCommand = new SnmpManagerCommand(this.formModel.value);
         this.snmpService.get(snmpManager)
             .take(1)
-            .subscribe((eq: Equipment) => this.updateEquips(eq));
+            .subscribe(data => { this.updateEquips(data); },
+                        error => { this.apiReturnedError(error); });
         this.snmpManager = snmpManager;
     }
 
@@ -38,10 +39,13 @@ export class SnmpManagerComponent {
     }
     private updateEquips(equipment: Equipment) {
         this.toast.success('A ferramenta conseguiu capturar as informações', 'Sucesso!', {
-            positionClass: 	'toast-top-right',
+            positionClass: 'toast-top-right',
             enableHtml: true
         });
         this.equipment = equipment;
         this.data = equipment.networkInterfaces;
+    }
+    private apiReturnedError(error: any): void {
+        console.log(error);
     }
 }

@@ -26,7 +26,7 @@ namespace SnmpTool.API.Controllers
             if (!validationResult.IsValid)
                 return HandleValidationFailure(validationResult.Errors);
 
-            return HandleQuery<EquipmentFullQuery, Equipment>(_equipmentService.GetFullEquipment(cmd));
+            return HandleCommand(_equipmentService.GetFullEquipment(cmd));
         }
         [HttpPost]
         [Route("{id:int}")]
@@ -37,7 +37,7 @@ namespace SnmpTool.API.Controllers
             if (!validationResult.IsValid)
                 return HandleValidationFailure(validationResult.Errors);
 
-            return HandleCallback<InterfaceDetail>(_equipmentService.GetInterfaceById(cmd, id));
+            return HandleCallback(_equipmentService.GetInterfaceById(cmd, id));
         }
     }
 }

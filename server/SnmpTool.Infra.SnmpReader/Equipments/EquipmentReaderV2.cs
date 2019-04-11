@@ -1,5 +1,6 @@
 ﻿using SnmpSharpNet;
 using SnmpTool.Domain.Equipments;
+using SnmpTool.Domain.Results;
 using SnmpTool.Domain.Snmp;
 using System;
 using System.Net;
@@ -13,7 +14,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
         public EquipmentReaderV2(SnmpManager snmpManager)
             => _snmpManager = snmpManager;
 
-        public Equipment GetEquipment()
+        public Result<Exception, Equipment> GetEquipment()
         {
             var equipment = new Equipment
             {
@@ -37,7 +38,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             if (equipment.InterfacesCount > 0)
             {
                 for (int i = 1; i <= equipment.InterfacesCount; i++)
-                    equipment.NetworkInterfaces.Add(GetInterfaceById(i));
+                    equipment.NetworkInterfaces.Add(GetInternalInterfaceById(i));
             }
             if (equipment.InterfacesCount == -1)
             {
@@ -47,7 +48,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
                 {
                     try
                     {
-                        equipment.NetworkInterfaces.Add(GetInterfaceById(index));
+                        equipment.NetworkInterfaces.Add(GetInternalInterfaceById(index));
                         index++;
                     }
                     catch
@@ -60,7 +61,7 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             return equipment;
         }
 
-        public InterfaceDetail GetInterfaceDetail(int interfaceId)
+        public Result<Exception, InterfaceDetail> GetInterfaceDetail(int interfaceId)
         {
             return new InterfaceDetail()
             {
@@ -72,7 +73,20 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
             };
         }
 
-        public Interface GetInterfaceById(int interfaceId)
+        public Result<Exception, Interface>  GetInterfaceById(int interfaceId)
+        {
+            return new Interface()
+            {
+                Index = GetContentByOId($"1.3.6.1.2.1.2.2.1.1.{interfaceId}"),
+                Description = GetContentByOId($"1.3.6.1.2.1.2.2.1.2.{interfaceId}"),
+                Type = GetContentByOId($"1.3.6.1.2.1.2.2.1.3.{interfaceId}"),
+                Speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}")),
+                Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}"),
+                AdminStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.7.{interfaceId}"),
+                OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}")
+            };
+        }
+        private Interface GetInternalInterfaceById(int interfaceId)
         {
             return new Interface()
             {
