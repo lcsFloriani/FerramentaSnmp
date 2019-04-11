@@ -21,7 +21,6 @@ export class RequestInterceptor implements HttpInterceptor {
 
         return next.handle(request).do((event: HttpEvent<any>) => { }, (err: any) => {
             if (err instanceof HttpErrorResponse) {
-                console.log(err);
                 this.apiErrorHandler.handleError(err);
             }
         });

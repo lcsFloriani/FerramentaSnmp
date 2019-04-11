@@ -12,7 +12,7 @@ import { ApiErrorHandler } from './ApiErrorHandler.service';
 export class ApiErrorComponent {
     public error: string;
     public haveError: boolean;
-    
+
     @Output() public errorResponse: EventEmitter<string> = new EventEmitter();
 
     constructor(public apiService: ApiService, public apiErrorHandler: ApiErrorHandler) {

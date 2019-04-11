@@ -26,6 +26,5 @@ export class SnmpToolComponent implements DoCheck {
     constructor(private fb: FormBuilder) { }
     public updateApiError(error: string): void {
         this.error = error;
-        console.log(error);
     }
 }
