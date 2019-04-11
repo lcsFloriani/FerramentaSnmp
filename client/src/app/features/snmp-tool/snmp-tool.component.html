@@ -1,3 +1,3 @@
-<app-api-error></app-api-error>
+<app-api-error (errorResponse)="updateApiError($event)"></app-api-error>
 
-<app-snmpmanager [formModel]="form"></app-snmpmanager>
+<app-snmpmanager *ngIf="!haveError" [formModel]="form"></app-snmpmanager>

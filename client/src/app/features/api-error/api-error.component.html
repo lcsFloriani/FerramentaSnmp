@@ -1,7 +1,7 @@
-<div *ngIf="showTopAlert" class="slds-notify_container">
-    <ngl-alert variant="error" iconName="error" (close)="onClose($event); showTopAlert = false;">
-      <h2 class="slds-text-heading_small">
-        {{ error }}
+<div *ngIf="haveError" class="slds-notify_container">
+    <ngl-alert variant="error" iconName="error">
+      <h2 class="slds-text-heading_small"><br>
+       {{ error }}
       </h2>
     </ngl-alert>
   </div>

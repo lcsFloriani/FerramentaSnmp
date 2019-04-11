@@ -11,8 +11,9 @@ export class ApiService {
     public get(): any {
         return this.httpClient.get(`${this.api}api/isAlive/`)
         .catch(err =>  {
-            this.apiErrorHandler.handleError(err);
-            return Observable.throwError('A ferramenta não conseguiu conexão com a api');
+            this.apiErrorHandler.handleError('A ferramenta não conseguiu conexão com a api');
+            const error = new Error('A ferramenta não conseguiu conexão com a api');
+            return Observable.throwError(error);
          });
     }
 }
