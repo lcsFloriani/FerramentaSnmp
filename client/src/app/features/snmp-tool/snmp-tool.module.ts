@@ -1,21 +1,18 @@
-import { RequestInterceptor } from './../../shared/request-interceptor';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
 import { NglModule } from 'ng-lightning';
 import { ChartsModule } from 'ng2-charts';
-import { SnmpService } from './shared/snmp.service';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { ApiService } from './api.service';
 import { SnmpToolComponent } from './snmp-tool.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SnmpService } from './shared/snmp.service';
 import { SnmpToolRoutingModule } from './snmp-tool-routing.module';
-import { DeviceInfoComponent } from './device-info/device-info.component';
-import { SnmpManagerComponent } from './snmp-manager/snmp-manager.component';
-import { ApiService } from './api.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiErrorComponent } from '../api-error/api-error.component';
 import { ApiErrorHandler } from '../api-error/ApiErrorHandler.service';
-
+import { RequestInterceptor } from './../../shared/request-interceptor';
+import { DeviceInfoComponent } from './device-info/device-info.component';
+import { SnmpManagerComponent } from './snmp-manager/snmp-manager.component';
 @NgModule({
     exports: [
         ApiErrorComponent,
@@ -40,9 +37,8 @@ import { ApiErrorHandler } from '../api-error/ApiErrorHandler.service';
         SnmpToolRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        NgSelectModule,
         ChartsModule,
-        NglModule
+        NglModule,
     ],
     declarations: [
         ApiErrorComponent,

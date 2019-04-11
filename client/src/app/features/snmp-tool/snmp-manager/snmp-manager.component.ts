@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Equipment, Interface, SnmpManagerCommand } from 'src/app/SnmpTool/shared/equipment.model';
 import { SnmpService } from '../shared/snmp.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-snmpmanager',
@@ -19,7 +20,7 @@ export class SnmpManagerComponent {
     open = true;
     collapsable = true;
 
-    constructor(public snmpService: SnmpService) { }
+    constructor(public snmpService: SnmpService, public toast: ToastrService) { }
 
     public GetData(): void {
         const snmpManager: SnmpManagerCommand = new SnmpManagerCommand(this.formModel.value);
@@ -36,6 +37,10 @@ export class SnmpManagerComponent {
         this.interface = data;
     }
     private updateEquips(equipment: Equipment) {
+        this.toast.success('A ferramenta conseguiu capturar as informações', 'Sucesso!', {
+            positionClass: 	'toast-top-right',
+            enableHtml: true
+        });
         this.equipment = equipment;
         this.data = equipment.networkInterfaces;
     }
