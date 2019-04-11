@@ -15,15 +15,22 @@ export class ApiErrorComponent {
 
     constructor(public apiService: ApiService, public apiErrorHandler: ApiErrorHandler) {
         Observable.interval(5000)
-        .takeWhile(() => true)
-        .subscribe(() => this.checkApi());
+            .takeWhile(() => true)
+            .subscribe(() => this.checkApi());
     }
+    showTopAlert = false;
 
+    onClose(reason: string) {
+        console.log(`Closed by ${reason}`);
+    }
     private checkApi(): void {
         this.apiService
-        .get()
-        .take(1)
-        .subscribe(this.error = this.apiErrorHandler.error);
+            .get()
+            .take(1)
+            .subscribe(() => {
+                this.error = this.apiErrorHandler.error;
+                this.showTopAlert = true;
+            });
     }
 }
 
