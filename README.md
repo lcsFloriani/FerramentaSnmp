@@ -2,7 +2,7 @@
 Ferramenta desenvolvida para matéria de gerencia de redes
 
 
-- .NET Core 2.2 / Angular 7 - NG-Lightning w/ Bootstrap GRID, Lightning Design System, NG-Select2 and RxJS
+- .NET Core 2.2 / Angular 7 - NG-Lightning w/ Bootstrap GRID, Lightning Design System and RxJS
 
 -ToDo List
 
