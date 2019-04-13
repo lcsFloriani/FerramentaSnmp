@@ -16,76 +16,98 @@ namespace SnmpTool.Infra.SnmpReader.Equipments
 
         public Result<Exception, Equipment> GetEquipment()
         {
-            var equipment = new Equipment
-            {
-                Description = GetContentByOId("1.3.6.1.2.1.1.1.0"),
-                Contact = GetContentByOId("1.3.6.1.2.1.1.4.0"),
-                Location = GetContentByOId("1.3.6.1.2.1.1.6.0"),
-                Name = GetContentByOId("1.3.6.1.2.1.1.5.0"),
-                UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
-            };
-
-            equipment.Memory = TryGetMemoryUsage();
-            equipment.Cpu = TryGetCpuUsage();
             try
             {
-                equipment.InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"));
+                var equipment = new Equipment
+                {
+                    Description = GetContentByOId("1.3.6.1.2.1.1.1.0"),
+                    Contact = GetContentByOId("1.3.6.1.2.1.1.4.0"),
+                    Location = GetContentByOId("1.3.6.1.2.1.1.6.0"),
+                    Name = GetContentByOId("1.3.6.1.2.1.1.5.0"),
+                    UpTime = GetContentByOId("1.3.6.1.2.1.1.3.0"),
+                };
+
+                equipment.Memory = TryGetMemoryUsage();
+                equipment.Cpu = TryGetCpuUsage();
+                try
+                {
+                    equipment.InterfacesCount = Convert.ToInt32(GetContentByOId("1.3.6.1.2.1.2.1.0"));
+                }
+                catch
+                {
+                    equipment.InterfacesCount = -1;
+                }
+                if (equipment.InterfacesCount > 0)
+                {
+                    for (int i = 1; i <= equipment.InterfacesCount; i++)
+                        equipment.NetworkInterfaces.Add(GetInternalInterfaceById(i));
+                }
+                if (equipment.InterfacesCount == -1)
+                {
+                    bool noerrors = true;
+                    int index = 1;
+                    while (noerrors)
+                    {
+                        try
+                        {
+                            equipment.NetworkInterfaces.Add(GetInternalInterfaceById(index));
+                            index++;
+                        }
+                        catch
+                        {
+                            noerrors = false;
+                        }
+
+                    }
+                }
+                return equipment;
+
             }
             catch
             {
-                equipment.InterfacesCount = -1;
+                return new Exception("Falha ao capturar equipamento");
             }
-            if (equipment.InterfacesCount > 0)
-            {
-                for (int i = 1; i <= equipment.InterfacesCount; i++)
-                    equipment.NetworkInterfaces.Add(GetInternalInterfaceById(i));
-            }
-            if (equipment.InterfacesCount == -1)
-            {
-                bool noerrors = true;
-                int index = 1;
-                while (noerrors)
-                {
-                    try
-                    {
-                        equipment.NetworkInterfaces.Add(GetInternalInterfaceById(index));
-                        index++;
-                    }
-                    catch
-                    {
-                        noerrors = false;
-                    }
-
-                }
-            }
-            return equipment;
         }
-
 
         public Result<Exception, InterfaceDetail> GetInterfaceDetail(int interfaceId)
         {
-            return new InterfaceDetail()
+            try
             {
-                UtilizationRate = GetUtilizationRate(interfaceId),
-                DiscardIn = GetDiscardIn(interfaceId),
-                DiscardOut = GetDiscardOut(interfaceId),
-                ErrorIn = GetInErrors(interfaceId),
-                ErrorOut = GetOutErrors(interfaceId)
-            };
+                return new InterfaceDetail()
+                {
+                    UtilizationRate = GetUtilizationRate(interfaceId),
+                    DiscardIn = GetDiscardIn(interfaceId),
+                    DiscardOut = GetDiscardOut(interfaceId),
+                    ErrorIn = GetInErrors(interfaceId),
+                    ErrorOut = GetOutErrors(interfaceId)
+                };
+            }
+            catch
+            {
+                return new Exception("Erro ao capturar detalhes da interface");
+            }
+
         }
 
         public Result<Exception, Interface> GetInterfaceById(int interfaceId)
         {
-            return new Interface()
+            try
             {
-                Index = GetContentByOId($"1.3.6.1.2.1.2.2.1.1.{interfaceId}"),
-                Description = GetContentByOId($"1.3.6.1.2.1.2.2.1.2.{interfaceId}"),
-                Type = GetContentByOId($"1.3.6.1.2.1.2.2.1.3.{interfaceId}"),
-                Speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}")),
-                Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}"),
-                AdminStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.7.{interfaceId}"),
-                OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}")
-            };
+                return new Interface()
+                {
+                    Index = GetContentByOId($"1.3.6.1.2.1.2.2.1.1.{interfaceId}"),
+                    Description = GetContentByOId($"1.3.6.1.2.1.2.2.1.2.{interfaceId}"),
+                    Type = GetContentByOId($"1.3.6.1.2.1.2.2.1.3.{interfaceId}"),
+                    Speed = Convert.ToDouble(GetContentByOId($"1.3.6.1.2.1.2.2.1.5.{interfaceId}")),
+                    Mac = GetContentByOId($"1.3.6.1.2.1.2.2.1.6.{interfaceId}"),
+                    AdminStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.7.{interfaceId}"),
+                    OperationalStatus = GetContentByOId($"1.3.6.1.2.1.2.2.1.8.{interfaceId}")
+                };
+            }
+            catch
+            {
+                return new Exception("Erro ao capturar informações da interface");
+            }
         }
         private double TryGetMemoryUsage()
         {

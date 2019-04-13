@@ -46,6 +46,10 @@ export class SnmpManagerComponent {
         this.data = equipment.networkInterfaces;
     }
     private apiReturnedError(error: any): void {
-        console.log(error);
+        this.toast.error(error.error.errorMessage, 'Erro', {
+            positionClass: 'toast-top-right',
+            enableHtml: true
+        });
+        this.equipment = null;
     }
 }
