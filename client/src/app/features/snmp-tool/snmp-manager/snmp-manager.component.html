@@ -204,8 +204,8 @@
               </div>
               <div class="col-md-2 mb-2">
                 <div class="form-group">
-                  <button type="button" nglButton variant="inverse" (click)="this.getData()"
-                    [disabled]="formModel.invalid">Monitorar</button>
+                  <button type="button" nglButton variant="inverse" (click)="this.changeMonitoring()"
+                    [disabled]="interfaceForm.invalid">Monitorar</button>
                 </div>
               </div>
             </form>
@@ -218,8 +218,10 @@
               <app-interface-details [interface]="this.interface"></app-interface-details>
             </div>
           </ng-template>
-          <ng-template nglAccordionSection name="B" label="Uso da interface" *ngIf="usage">
-
+          <ng-template nglAccordionSection name="B" label="Uso da interface" *ngIf="monitoring">
+            teste
+            <app-interface-usage [interface]="interface" [snmpManager]="snmpManager" [monitoring]="monitoring" [interval]="interval">
+            </app-interface-usage>
           </ng-template>
         </ul>
       </ngl-expandable-section>

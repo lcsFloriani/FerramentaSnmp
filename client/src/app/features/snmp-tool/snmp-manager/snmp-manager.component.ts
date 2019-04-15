@@ -17,7 +17,8 @@ export class SnmpManagerComponent {
     public equipment: Equipment;
     public interface: Interface;
     public snmpManager: SnmpManagerCommand;
-
+    public monitoring = false;
+    public interval: number;
     public interfaceForm: FormGroup = this.fb.group({
         interval: ['', [Validators.required, NumberValidator.isNumber, Validators.min(10)]],
     });
@@ -47,17 +48,30 @@ export class SnmpManagerComponent {
     public changeDevice() {
         this.collapsableDevice = !this.collapsableDevice;
     }
+
     public changeInterface() {
         this.collapsableInterface = !this.collapsableInterface;
     }
+
     public changeInterfaceDetails() {
         this.collapsableInterfaceDetails = !this.collapsableInterfaceDetails;
     }
+
+    public changeMonitoring(): void {
+        if (!this.monitoring) {
+            this.monitoring = true;
+            this.interval = this.interfaceForm.get('interval').value;
+        } else {
+            this.monitoring = false;
+        }
+    }
+
     public updateSelectedInterface(data: Interface): void {
         this.interface = data;
-        console.log("interface => " + this.interface);
-        console.log("data => " + data);
+        console.log('interface => ' + this.interface);
+        console.log('data => ' + data);
     }
+
     private updateEquips(equipment: Equipment) {
         this.toast.success('A ferramenta conseguiu capturar as informações', 'Sucesso!', {
             positionClass: 'toast-top-right',

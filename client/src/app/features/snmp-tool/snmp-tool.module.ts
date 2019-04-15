@@ -16,6 +16,7 @@ import { RequestInterceptor } from './../../shared/request-interceptor';
 import { DeviceInfoComponent } from './device-info/device-info.component';
 import { SnmpManagerComponent } from './snmp-manager/snmp-manager.component';
 import { InterfaceComponent } from './interface/interface.component';
+import { InterfaceUsageComponent } from './interface-usage/interface-usage.component';
 @NgModule({
     exports: [
         ApiErrorComponent,
@@ -23,7 +24,7 @@ import { InterfaceComponent } from './interface/interface.component';
         SnmpManagerComponent,
         DeviceInfoComponent,
         InterfaceComponent,
-        // InterfaceUsageComponent
+        InterfaceUsageComponent
     ],
     providers: [
         ApiService,
@@ -50,7 +51,7 @@ import { InterfaceComponent } from './interface/interface.component';
         SnmpManagerComponent,
         DeviceInfoComponent,
         InterfaceComponent,
-        // InterfaceUsageComponent
+        InterfaceUsageComponent
     ],
 })
 
