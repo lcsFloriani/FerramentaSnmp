@@ -15,7 +15,6 @@ export class SnmpToolComponent implements DoCheck {
         community: ['', Validators.required],
         timeout: ['', [Validators.required, NumberValidator.isNumber, Validators.min(1)]],
         retries: ['', [Validators.required, NumberValidator.isNumber, Validators.min(1)]],
-        interval: ['', [Validators.required, NumberValidator.isNumber, Validators.min(10)]],
         snmpVersion: ['', Validators.required],
     });
     public error: string;

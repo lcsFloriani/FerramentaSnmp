@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-import { Equipment, Interface, SnmpManagerCommand } from 'src/app/SnmpTool/shared/equipment.model';
 import { SnmpService } from '../shared/snmp.service';
 import { ToastrService } from 'ngx-toastr';
+import { NumberValidator } from 'src/app/shared/validators/number.validator';
+import { Interface, SnmpManagerCommand, Equipment } from '../shared/equipment.model';
 
 @Component({
     selector: 'app-snmpmanager',
@@ -17,25 +18,45 @@ export class SnmpManagerComponent {
     public interface: Interface;
     public snmpManager: SnmpManagerCommand;
 
-    open = true;
-    collapsable = true;
+    public interfaceForm: FormGroup = this.fb.group({
+        interval: ['', [Validators.required, NumberValidator.isNumber, Validators.min(10)]],
+    });
 
-    constructor(public snmpService: SnmpService, public toast: ToastrService) { }
+    public active = null;
 
-    public GetData(): void {
+    openDevice = true;
+    collapsableDevice = true;
+
+    openInterface = true;
+    collapsableInterface = true;
+
+    openInterfaceDetails = true;
+    collapsableInterfaceDetails = true;
+
+    constructor(public snmpService: SnmpService, public toast: ToastrService, private fb: FormBuilder) { }
+
+    public getData(): void {
         const snmpManager: SnmpManagerCommand = new SnmpManagerCommand(this.formModel.value);
         this.snmpService.get(snmpManager)
             .take(1)
             .subscribe(data => { this.updateEquips(data); },
-                        error => { this.apiReturnedError(error); });
+                error => { this.apiReturnedError(error); });
         this.snmpManager = snmpManager;
     }
 
-    change() {
-        this.collapsable = !this.collapsable;
+    public changeDevice() {
+        this.collapsableDevice = !this.collapsableDevice;
+    }
+    public changeInterface() {
+        this.collapsableInterface = !this.collapsableInterface;
+    }
+    public changeInterfaceDetails() {
+        this.collapsableInterfaceDetails = !this.collapsableInterfaceDetails;
     }
     public updateSelectedInterface(data: Interface): void {
         this.interface = data;
+        console.log("interface => " + this.interface);
+        console.log("data => " + data);
     }
     private updateEquips(equipment: Equipment) {
         this.toast.success('A ferramenta conseguiu capturar as informações', 'Sucesso!', {

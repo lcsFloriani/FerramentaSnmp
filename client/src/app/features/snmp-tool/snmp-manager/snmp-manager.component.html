@@ -1,4 +1,4 @@
-<div class="container-fluid" class="rounded border border-primary">
+<div class="col-sm-12 container-fluid rounded border border-primary">
   <div class="row">
     <div class="col-sm-12">
       <form [formGroup]="formModel">
@@ -143,39 +143,11 @@
               </label>
             </div>
           </div>
-          <div class="col-md-2 mb-2">
-            <div class="form-group">
-              <ngl-input label="Intervalo de monitoração"
-                fieldLevelHelpTooltip="Intervalo de monitoração da interface em segundos">
-                <input ngl type="input" formControlName="interval" name="interval" id="interval">
-              </ngl-input>
-              <label class="col-form-label font-weight-light" for="interval">
-                <div>
-                  <span class="label-error"
-                    *ngIf="formModel.get('interval').hasError('required') && formModel.get('interval').touched">
-                    - Campo obrigatório
-                  </span>
-                </div>
-                <div>
-                  <span class="label-error"
-                    *ngIf="formModel.get('interval').hasError('invalidNumber') && formModel.get('interval').touched">
-                    - Valor informado não é um número valido
-                  </span>
-                </div>
-                <div>
-                  <span class="label-error"
-                    *ngIf="formModel.get('interval').hasError('min') && formModel.get('interval').touched">
-                    - O valor deve ser maior que 10
-                  </span>
-                </div>
-              </label>
-            </div>
-          </div>
           <div class="col-md-1 mb-1">
             <div class="form-group">
               <div class="">
                 <br>
-                <button type="button" nglButton variant="inverse" (click)="this.GetData()"
+                <button type="button" nglButton variant="inverse" (click)="this.getData()"
                   [disabled]="formModel.invalid">Buscar</button>
               </div>
             </div>
@@ -184,8 +156,72 @@
       </form>
     </div>
     <div class="col-sm-12" *ngIf="equipment">
-      <ngl-expandable-section [(open)]="open" title="Informações do dispositivo" [collapsable]="collapsable">
-          <app-device-info [equipment]="equipment"></app-device-info> 
+      <ngl-expandable-section [(open)]="openDevice" title="Informações do dispositivo"
+        [collapsable]="collapsableDevice">
+        <app-device-info [equipment]="equipment"></app-device-info>
+      </ngl-expandable-section>
+    </div>
+    <hr>
+    <div class="col-sm-12" *ngIf="equipment">
+      <ngl-expandable-section [(open)]="openInterface" title="Informações da interface"
+        [collapsable]="collapsableInterface">
+        <div class="col-sm-12 form-row">
+          <div class="col-md-3 mb-3">
+            <span>Interface</span>
+            <ng-select [items]="data" bindLabel="description" [(ngModel)]="interface"
+              placeholder="Selecione a interface">
+            </ng-select>
+          </div>
+          <div class="col-sm-4 mb-4">
+            <form [formGroup]="interfaceForm">
+              <div class="col-md-6 mb-6">
+                <div class="form-group">
+                  <ngl-input label="Intervalo de monitoração"
+                    fieldLevelHelpTooltip="Intervalo de monitoração da interface em segundos">
+                    <input ngl type="input" formControlName="interval" name="interval" id="interval">
+                  </ngl-input>
+                  <label class="col-form-label font-weight-light" for="interval">
+                    <div>
+                      <span class="label-error"
+                        *ngIf="interfaceForm.get('interval').hasError('required') && interfaceForm.get('interval').touched">
+                        - Campo obrigatório
+                      </span>
+                    </div>
+                    <div>
+                      <span class="label-error"
+                        *ngIf="interfaceForm.get('interval').hasError('invalidNumber') && interfaceForm.get('interval').touched">
+                        - Valor informado não é um número valido
+                      </span>
+                    </div>
+                    <div>
+                      <span class="label-error"
+                        *ngIf="interfaceForm.get('interval').hasError('min') && interfaceForm.get('interval').touched">
+                        - O valor deve ser maior que 10
+                      </span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-2 mb-2">
+                <div class="form-group">
+                  <button type="button" nglButton variant="inverse" (click)="this.getData()"
+                    [disabled]="formModel.invalid">Monitorar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <ul ngl-accordion [(activeName)]="active" *ngIf="interface" multiple>
+          <ng-template nglAccordionSection name="interfaceDetails" label="Detalhes da interface"
+            icon="utility:agent_session">
+            <div class="col-sm-12">
+              <app-interface-details [interface]="this.interface"></app-interface-details>
+            </div>
+          </ng-template>
+          <ng-template nglAccordionSection name="B" label="Uso da interface" *ngIf="usage">
+
+          </ng-template>
+        </ul>
       </ngl-expandable-section>
     </div>
   </div>

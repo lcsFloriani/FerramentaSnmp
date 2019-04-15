@@ -32,7 +32,8 @@
               "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
               "node_modules/@angular/cdk/overlay-prebuilt.css",
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@ng-select/ng-select/themes/ant.design.theme.css"
             ],
             "scripts": [
             ],
