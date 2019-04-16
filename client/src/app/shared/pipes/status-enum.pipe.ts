@@ -1,6 +1,7 @@
+import { statusEnum } from './../../features/snmp-tool/shared/equipment.model';
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { EnumValues } from 'enum-values';
-import { statusEnum } from 'src/app/SnmpTool/shared/equipment.model';
 
 @Pipe({ name: 'statusEnum' })
 /* tslint:disable */
