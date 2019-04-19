@@ -37,6 +37,7 @@ export class SnmpManagerComponent {
     constructor(public snmpService: SnmpService, public toast: ToastrService, private fb: FormBuilder) { }
 
     public getData(): void {
+        this.interface = null;
         const snmpManager: SnmpManagerCommand = new SnmpManagerCommand(this.formModel.value);
         this.snmpService.get(snmpManager)
             .take(1)

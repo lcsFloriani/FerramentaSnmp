@@ -30,7 +30,7 @@
     "enum-values": "^1.2.1",
     "is-ip": "^2.0.0",
     "jquery": "^3.4.0",
-    "ng-lightning": "^4.2.0",
+    "ng-lightning": "^4.3.0",
     "ng2-charts": "^2.2.2",
     "ngx-toastr": "^10.0.2",
     "popper": "^1.0.1",
