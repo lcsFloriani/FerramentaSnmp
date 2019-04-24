@@ -26,6 +26,14 @@
                 <span title="{{ interface?.type }}" class="font-weight-light"> {{ interface?.type }}</span>
             </div>
         </div>
+        <div class="col-sm-3" *ngIf="interface?.mac">
+            <div>
+                <span>MAC</span>
+            </div>
+            <div class="truncate">
+                <span title="{{ interface?.mac }}" class="font-weight-light"> {{ interface?.mac }}</span>
+            </div>
+        </div>
         <div class="col-sm-3" *ngIf="interface?.speed">
             <div>
                 <span>Velocidade</span>

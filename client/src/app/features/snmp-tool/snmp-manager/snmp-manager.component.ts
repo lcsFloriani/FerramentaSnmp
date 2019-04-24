@@ -20,7 +20,7 @@ export class SnmpManagerComponent {
     public monitoring = false;
     public interval: number;
     public interfaceForm: FormGroup = this.fb.group({
-        interval: ['', [Validators.required, NumberValidator.isNumber, Validators.min(10)]],
+        interval: ['', [Validators.required, NumberValidator.isNumber, Validators.min(5)]],
     });
 
     public active = null;
